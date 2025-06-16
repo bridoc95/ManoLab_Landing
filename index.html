@@ -1537,7 +1537,7 @@
             });
         }
 
-        // Enhanced Form Submission
+        // Enhanced Form Submission (기존 코드 교체)
         const signupForm = document.getElementById('signup-form');
         if (signupForm) {
             signupForm.addEventListener('submit', async function(e) {
@@ -1561,7 +1561,7 @@
                     return;
                 }
                 
-                // 휴대폰 번호 형식 검증 (하이픈 포함된 형태로 자동 변환됨)
+                // 휴대폰 번호 형식 검증
                 const phoneRegex = /^01[0-9]-[0-9]{4}-[0-9]{4}$/;
                 if (!phoneRegex.test(formData.phone)) {
                     alert('올바른 휴대폰 번호를 입력해주세요.');
@@ -1582,15 +1582,25 @@
                 try {
                     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybUDqZdE695UVbvgWkk_-XUXswKV43-DdpEoJLBaqKWoKjD7arRKsV9i441n2PPpk3/exec';
                     
+                    console.log('요청 데이터:', formData); // 디버깅용
+                    
                     const response = await fetch(SCRIPT_URL, {
                         method: 'POST',
+                        mode: 'cors', // CORS 모드 명시적 설정
                         headers: {
-                            'Content-Type': 'text/plain',
+                            'Content-Type': 'application/json',
                         },
                         body: JSON.stringify(formData)
                     });
                     
+                    console.log('응답 상태:', response.status, response.statusText); // 디버깅용
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+                    }
+                    
                     const result = await response.json();
+                    console.log('응답 데이터:', result); // 디버깅용
                     
                     if (result.result === 'success') {
                         alert(`🎉 사전 등록이 완료되었습니다!\n\n${formData.name}님은 ${result.waitingNumber}번째 대기자입니다.\n\n베타 출시 소식을 가장 먼저 전해드리겠습니다.`);
@@ -1602,12 +1612,24 @@
                     } else if (result.type === 'duplicate_user') {
                         alert('이미 등록하신 적이 있습니다.');
                     } else {
-                        alert('등록 중 오류가 발생했습니다. 다시 시도해주세요.');
+                        alert(`등록 중 오류가 발생했습니다.\n\n${result.message || '알 수 없는 오류'}`);
                     }
                     
                 } catch (error) {
-                    console.error('Registration error:', error);
-                    alert('등록 중 오류가 발생했습니다.\n\n' + error.message + '\n\n다시 시도해주세요.');
+                    console.error('상세 에러 정보:', error);
+                    
+                    let errorMessage = '등록 중 오류가 발생했습니다.\n\n';
+                    
+                    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                        errorMessage += '네트워크 연결을 확인해주세요.\n';
+                        errorMessage += '또는 Google Apps Script 배포 설정을 확인해주세요.';
+                    } else if (error.name === 'SyntaxError') {
+                        errorMessage += '서버 응답 형식에 문제가 있습니다.';
+                    } else {
+                        errorMessage += error.message;
+                    }
+                    
+                    alert(errorMessage + '\n\n문제가 지속되면 contact@manolab.com으로 문의해주세요.');
                 } finally {
                     submitButton.disabled = false;
                     submitButton.textContent = originalButtonText;
