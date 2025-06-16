@@ -1606,9 +1606,8 @@
                     }
                     
                 } catch (error) {
-                    alert('🎉 사전 등록이 완료되었습니다!\n\n베타 출시 소식을 가장 먼저 전해드리겠습니다.');
-                    signupForm.reset();
-                    console.error('Error:', error);
+                    console.error('Registration error:', error);
+                    alert('등록 중 오류가 발생했습니다.\n\n' + error.message + '\n\n다시 시도해주세요.');
                 } finally {
                     submitButton.disabled = false;
                     submitButton.textContent = originalButtonText;
