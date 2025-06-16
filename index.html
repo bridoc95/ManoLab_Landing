@@ -9,46 +9,19 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }, 
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
                         primary: '#4F46E5',
                         secondary: '#3730A3',
-                        accent: '#818CF8',
-                        background: '#F9FAFB',
-                        card: '#FFFFFF',
-                        text_primary: '#1A202C',
-                        text_secondary: '#6B7280',
-                        signup_bg_light_blue: '#E0E8F8',
-                        signup_button_blue: '#5B75E5',
-                        signup_bonus_yellow: '#FFFBE6',
-                        signup_bonus_text: '#9C6F00',
+                        accent: '#818CF8'
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.8s ease-out',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'bounce-gentle': 'bounce-gentle 2s infinite',
                     },
                     keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        'blink-caret': {
-                            '0%, 50%': { borderColor: 'transparent' },
-                            '51%, 100%': { borderColor: '#4F46E5' },
-                        },
-                        'bounce-gentle': {
-                            '0%, 100%': { 
-                                transform: 'translateY(-25%)',
-                                animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)'
-                            },
-                            '50%': { 
-                                transform: 'translateY(0)',
-                                animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)'
-                            },
-                        }
+                        fadeInUp: { '0%': { opacity: '0', transform: 'translateY(30px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        'bounce-gentle': { '0%, 100%': { transform: 'translateY(-25%)', animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)' }, '50%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)' } }
                     }
                 }
             }
@@ -56,1213 +29,777 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #ffffff; min-height: 100vh; }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            min-height: 100vh;
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .typing-text {
-            border-right: 2px solid #4F46E5;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        .section-fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .section-fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .ai-response {
-            background: linear-gradient(135deg, #4F46E5, #818CF8);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 20px;
-            margin: 10px 0;
-            animation: fadeInUp 0.5s ease;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
-        }
-
-        .user-message {
-            background: #f3f4f6;
-            color: #1f2937;
-            padding: 15px 20px;
-            border-radius: 20px;
-            margin: 10px 0;
-            text-align: right;
-            animation: fadeInUp 0.5s ease;
+        /* 통합된 글래스 효과 */
+        .glass { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.18); }
+        .nav-blur { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        
+        /* 통합된 그라디언트 */
+        .gradient-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-bg { background: linear-gradient(135deg, #4F46E5, #818CF8); }
+        .gradient-text { 
+            background: linear-gradient(to right, #4F46E5, #818CF8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
         }
         
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .demo-screen {
-            background: #000;
-            border-radius: 25px;
-            padding: 20px;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            min-height: 300px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .demo-screen::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 49%, rgba(0, 255, 0, 0.03) 50%, transparent 51%);
-            animation: scan 2s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .nav-blur {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-
+        /* 애니메이션 통합 */
+        .section-fade { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .section-fade.visible { opacity: 1; transform: translateY(0); }
+        
+        /* 채팅 스타일 */
+        .chat-container { background: linear-gradient(to-br, #f9fafb, white); }
+        .message { padding: 15px 20px; border-radius: 20px; margin: 10px 0; animation: fadeInUp 0.5s ease; }
+        .message-ai { background: linear-gradient(135deg, #4F46E5, #818CF8); color: white; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); }
+        .message-user { background: #f3f4f6; color: #1f2937; text-align: right; }
+        
+        html { scroll-behavior: smooth; }
+        
         @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-            
-            .glass-effect {
-                backdrop-filter: blur(8px);
-            }
-            
-            .demo-screen {
-                min-height: 200px;
-                padding: 15px;
-            }
+            .glass { padding: 20px !important; }
+            .faq-question { padding: 24px 20px !important; font-size: 16px !important; }
+            .faq-question:active { background-color: rgba(79, 70, 229, 0.1) !important; }
         }
     </style>
 </head>
-<body class="text-text_primary">
+<body class="text-gray-900">
 
 <div id="top"></div>
 
-    <!-- Enhanced Navigation Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 nav-blur border-b border-gray-200/50 shadow-sm">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="text-2xl font-bold text-primary/95">ManoLab</div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+<!-- 간소화된 네비게이션 -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 nav-blur border-b border-gray-200/50 shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="text-2xl font-bold text-primary/95">ManoLab</div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition duration-300">
+                <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </div>
-    </header>
+    </div>
+</header>
 
-    <main class="pt-16">
-        <!-- Enhanced Hero Section with Live Demo -->
-        <section id="intro" class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-20 md:py-32 px-4 sm:px-6 lg:px-8">
-            <div class="container mx-auto max-w-7xl">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+<main class="pt-16">
+    <!-- 히어로 섹션 -->
+    <section id="intro" class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-20 md:py-32 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                
+                <!-- 메인 메시지 -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-8 md:mb-16">
+                        <span class="gradient-text">AI가 당신을 대신합니다.</span>
+                        <span class="block text-gray-900 animate-fade-in-up text-3xl md:text-4xl lg:text-5xl mt-2">당신의 시간은 소중하니까.</span>
+                    </h1>
                     
-                    <!-- Left Side - Main Message -->
-                    <div class="text-center lg:text-left">
-                        <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-8 md:mb-16">
-                            <span class="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">AI가 당신을 대신합니다.</span>
-                            <span class="block text-text_primary animate-fade-in-up text-3xl md:text-4xl lg:text-5xl mt-2">당신의 시간은 소중하니까.</span>
-                        </h1>
-                        
-                        <div class="text-center lg:text-left mb-8">
-                            <p class="text-base text-gray-700 font-medium mb-0.5">
-                                <span class="text-gray-800">이제 앱 조작은 AI에게 맡기세요.</span>
-                            </p>
-                            
-                            <p class="text-base text-gray-700 font-medium mb-0.5">
-                                음식 배달, 쇼핑, 병원예약까지 자동으로.
-                            </p>
-                            
-                            <p class="text-base text-gray-700 font-medium">
-                                당신은 정말 중요한 일에만 집중하세요.
-                            </p>
-                        </div>
-                        
-                        <!-- CTA Buttons -->
-                        <div class="mt-8 animate-fade-in-up space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center lg:justify-start mb-12">
-                            <a href="#signup" class="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-full shadow-lg hover:bg-secondary transition duration-300 transform hover:scale-105">
-                                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                사전 신청하기
-                            </a>
-                        </div>
-                        
-                        <!-- Enhanced Trust Indicators with Impact Design -->
-                        <div class="mt-12">
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center lg:text-left">
-                                <!-- Money Savings -->
-                                <div class="group hover:scale-105 transition duration-300">
-                                    <div class="flex items-center justify-center lg:justify-start mb-3">
-                                        <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition duration-300 mr-4 flex-shrink-0">
-                                            <span class="text-xl">💰</span>
-                                        </div>
-                                        <div>
-                                            <div class="text-3xl font-bold text-primary" id="hero-money-counter">₩42,000</div>
-                                            <div class="text-sm font-medium text-gray-600">월 평균 절약</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Time Savings -->
-                                <div class="group hover:scale-105 transition duration-300">
-                                    <div class="flex items-center justify-center lg:justify-start mb-3">
-                                        <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition duration-300 mr-4 flex-shrink-0">
-                                            <span class="text-xl">⏱️</span>
-                                        </div>
-                                        <div>
-                                            <div class="text-3xl font-bold text-primary" id="hero-time-counter">34분</div>
-                                            <div class="text-sm font-medium text-gray-600">하루 절약 시간</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Tasks Completed -->
-                                <div class="group hover:scale-105 transition duration-300">
-                                    <div class="flex items-center justify-center lg:justify-start mb-3">
-                                        <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition duration-300 mr-4 flex-shrink-0">
-                                            <span class="text-xl">🎯</span>
-                                        </div>
-                                        <div>
-                                            <div class="text-3xl font-bold text-primary" id="hero-task-counter">1,247</div>
-                                            <div class="text-sm font-medium text-gray-600">완료된 작업</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="text-center lg:text-left mb-8 space-y-1">
+                        <p class="text-base text-gray-700 font-medium">이제 앱 조작은 AI에게 맡기세요.</p>
+                        <p class="text-base text-gray-700 font-medium">음식 배달, 쇼핑, 병원예약까지 자동으로.</p>
+                        <p class="text-base text-gray-700 font-medium">당신은 정말 중요한 일에만 집중하세요.</p>
                     </div>
                     
-                    <!-- Right Side - Live Demo -->
-                    <div class="relative" id="demo">
-                        <div class="glass-effect p-4 md:p-8 rounded-3xl shadow-2xl">
-                            <!-- 헤더 섹션 개선 -->
-                            <div class="text-center mb-8">
-                                <!-- Live 상태 표시 -->
-                                <div class="inline-flex items-center gap-2 mb-4">
-                                    <div class="relative">
-                                        <div class="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
-                                        <div class="absolute top-0 left-0 w-2.5 h-2.5 bg-green-400 rounded-full animate-ping"></div>
+                    <!-- CTA 버튼 -->
+                    <div class="mt-8 animate-fade-in-up mb-12">
+                        <a href="#signup" class="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-full shadow-lg hover:bg-secondary transition duration-300 transform hover:scale-105">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            사전 신청하기
+                        </a>
+                    </div>
+                    
+                    <!-- 신뢰 지표 -->
+                    <div class="mt-12">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center lg:text-left">
+                            <div class="group hover:scale-105 transition duration-300" data-stat="money">
+                                <div class="flex items-center justify-center lg:justify-start mb-3">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl flex items-center justify-center shadow-lg mr-4">
+                                        <span class="text-xl">💰</span>
                                     </div>
-                                    <span class="text-xs font-semibold text-green-600 uppercase tracking-wider">Live Demo</span>
-                                </div>
-                                
-                                <!-- 메인 타이틀 -->
-                                <h3 class="text-3xl font-black text-gray-900 mb-2">
-                                    ManoLab AI Agent <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">체험하기</span>
-                                </h3>
-                            </div>
-
-                            <!-- Chat Interface 개선 -->
-                            <div class="relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 mb-4 h-80 overflow-y-auto border border-gray-100" id="hero-chat-container">
-                                <!-- 채팅 시작 화면 -->
-                                <div class="text-center text-gray-500 py-6">
-                                    <!-- AI 아바타 개선 -->
-                                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                                        </svg>
-                                    </div>
-                                    
-                                    <p class="text-lg font-semibold text-gray-700 mb-1">ManoLab AI와 대화해보세요!</p>
-                                    <p class="text-sm text-gray-500 mb-6">아래 예시 명령어를 클릭하거나 직접 입력해보세요.</p>
-                                    
-                                    <!-- 추천 명령어 카드 스타일 -->
-                                    <div class="space-y-3 text-left">
-                                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                                            <div class="flex items-start gap-3">
-                                                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors">
-                                                    <span class="text-blue-600">☕</span>
-                                                </div>
-                                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"스타벅스에서 늘 마시던 아이스 아메리카노 주문해 줘"</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                                            <div class="flex items-start gap-3">
-                                                <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-purple-200 transition-colors">
-                                                    <span class="text-purple-600">📦</span>
-                                                </div>
-                                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"방금 주문한 옷, 배송지를 회사로 바꾸고 어디쯤 오는지 알려줘"</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                                            <div class="flex items-start gap-3">
-                                                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
-                                                    <span class="text-green-600">🏥</span>
-                                                </div>
-                                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"오늘 저녁에 비대면 진료로 피부과 의사 예약해 줘"</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                                            <div class="flex items-start gap-3">
-                                                <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-orange-200 transition-colors">
-                                                    <span class="text-orange-600">🍗</span>
-                                                </div>
-                                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"교촌치킨 허니콤보 배달 주문해줘"</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                                            <div class="flex items-start gap-3">
-                                                <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-200 transition-colors">
-                                                    <span class="text-yellow-600">🚕</span>
-                                                </div>
-                                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"회사까지 택시 호출해 줘"</p>
-                                            </div>
-                                        </div>
+                                    <div>
+                                        <div class="text-3xl font-bold text-primary">₩42,000</div>
+                                        <div class="text-sm font-medium text-gray-600">월 평균 절약</div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- 입력창 개선 -->
-                            <div class="relative">
-                                <div class="flex items-center bg-white rounded-2xl px-5 py-4 shadow-lg border border-gray-200 hover:border-indigo-300 transition-colors focus-within:border-indigo-400 focus-within:ring-4 focus-within:ring-indigo-50">
-                                    <div class="flex-shrink-0 mr-3">
-                                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                            </svg>
-                                        </div>
+
+                            <div class="group hover:scale-105 transition duration-300" data-stat="time">
+                                <div class="flex items-center justify-center lg:justify-start mb-3">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl flex items-center justify-center shadow-lg mr-4">
+                                        <span class="text-xl">⏱️</span>
                                     </div>
-                                    <input type="text" id="hero-chat-input" placeholder="AI에게 무엇이든 명령해보세요..."
-                                        class="flex-grow bg-transparent outline-none text-gray-700 placeholder-gray-400 text-sm font-medium" />
-                                    <button id="hero-send-button" class="ml-3 p-3 rounded-full bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:scale-105 transition-all duration-200 group">
-                                        <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                                        </svg>
-                                    </button>
+                                    <div>
+                                        <div class="text-3xl font-bold text-primary">34분</div>
+                                        <div class="text-sm font-medium text-gray-600">하루 절약 시간</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group hover:scale-105 transition duration-300" data-stat="users">
+                                <div class="flex items-center justify-center lg:justify-start mb-3">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/30 rounded-xl flex items-center justify-center shadow-lg mr-4">
+                                        <span class="text-xl">👥</span>
+                                    </div>
+                                    <div>
+                                        <div id="hero-user-counter" class="text-3xl font-bold text-primary">0</div>
+                                        <div class="text-sm font-medium text-gray-600">사전등록 사용자</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+                
+                <!-- 라이브 데모 -->
+                <div class="relative" id="demo">
+                    <div class="glass p-4 md:p-8 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer">
+                        <div class="text-center mb-8">
+                            <div class="inline-flex items-center gap-2 mb-4">
+                                <div class="relative">
+                                    <div class="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
+                                    <div class="absolute top-0 left-0 w-2.5 h-2.5 bg-green-400 rounded-full animate-ping"></div>
+                                </div>
+                                <span class="text-xs font-semibold text-green-600 uppercase tracking-wider">Live Demo</span>
+                            </div>
+                            
+                            <h3 class="text-3xl font-black text-gray-900 mb-2">
+                                ManoLab AI Agent <span class="gradient-text">체험하기</span>
+                            </h3>
+                        </div>
 
-        <!-- Enhanced Why ManoLab Section -->
-        <section id="why-manolab" class="bg-white py-20 md:py-32 px-4 sm:px-6 lg:px-8 section-fade-in">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6">
-                        <span class="text-gray-800">ManoLab이 특별한 </span>
-                        <span class="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">3가지 이유</span>
-                    </h2>
-                <p class="text-xl text-gray-700 mb-16 max-w-3xl mx-auto font-medium leading-relaxed">
-                    당신의 필요를 이해하고 대신 행동하는 지능형 AI 에이전트와 함께<br>
-                    모바일 자동화의 미래를 경험하세요.
+                        <!-- 채팅 인터페이스 -->
+                        <div id="hero-chat-container" class="chat-container rounded-2xl p-6 mb-4 h-80 overflow-y-auto border border-gray-100">
+                            <div class="text-center text-gray-500 py-6">
+                                <div class="w-16 h-16 mx-auto mb-4 gradient-bg rounded-2xl flex items-center justify-center shadow-lg">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                    </svg>
+                                </div>
+                                
+                                <p class="text-lg font-semibold text-gray-700 mb-1">ManoLab AI와 대화해보세요!</p>
+                                <p class="text-sm text-gray-500 mb-6">아래 예시 명령어를 클릭하거나 직접 입력해보세요.</p>
+                                
+                                <!-- 간소화된 명령어 예시 -->
+                                <div class="space-y-3 text-left" id="command-examples">
+                                    <!-- JavaScript로 동적 생성 -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 입력창 -->
+                        <div class="relative">
+                            <div class="flex items-center bg-white rounded-2xl px-5 py-4 shadow-lg border border-gray-200 hover:border-indigo-300 transition-colors focus-within:border-indigo-400 focus-within:ring-4 focus-within:ring-indigo-50">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <input type="text" id="hero-chat-input" placeholder="AI에게 무엇이든 명령해보세요..." class="flex-grow bg-transparent outline-none text-gray-700 placeholder-gray-400 text-sm font-medium" />
+                                <button id="hero-send-button" class="ml-3 p-3 rounded-full gradient-bg text-white hover:shadow-lg hover:scale-105 transition-all duration-200 group">
+                                    <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 특별한 이유 섹션 -->
+    <section id="why-manolab" class="bg-white py-20 md:py-32 px-4 sm:px-6 lg:px-8 section-fade">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                <span class="text-gray-800">ManoLab이 특별한 </span>
+                <span class="gradient-text">3가지 이유</span>
+            </h2>
+            <p class="text-xl text-gray-700 mb-16 max-w-3xl mx-auto font-medium leading-relaxed">
+                당신의 필요를 이해하고 대신 행동하는 지능형 AI 에이전트와 함께<br>
+                모바일 자동화의 미래를 경험하세요.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto" id="features-grid">
+                <!-- JavaScript로 동적 생성 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 하루 시나리오 섹션 -->
+    <section id="how-it-works" class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-12 md:py-20 lg:py-32 px-4 sm:px-6 lg:px-8 section-fade">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+                    <span class="text-gray-800">하루가 </span>
+                    <span class="gradient-text">이렇게</span>
+                    <span class="text-gray-800"> 바뀌어요.</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
+                    실제 사용자들의 일상 속 ManoLab AI 활용법을 살펴보세요!
                 </p>
-
-                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- 스마트 자동화 카드 -->
-                    <div class="group relative bg-gradient-to-br from-blue-50 via-white to-purple-50 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-primary/30 transform hover:scale-105 hover:-translate-y-4">
-                        <!-- 이미지 영역 -->
-                        <div class="w-20 h-20 bg-gradient-to-br from-primary/20 to-purple-500/30 rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 mx-auto">
-                            <!-- 스마트폰과 AI 아이콘 조합 -->
-                            <div class="relative">
-                                <div class="w-8 h-12 bg-gray-800 rounded-lg flex items-center justify-center">
-                                    <div class="w-6 h-8 bg-primary rounded-sm"></div>
-                                </div>
-                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center">
-                                    <span class="text-xs">⚡</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-primary transition-colors duration-300 text-center">말만 해도 척척</h3>
-                        <p class="text-gray-600 leading-relaxed text-lg text-center">이전 주문과 취향을 기억해서<br>'평소 마시던 거 주문해줘'만 말해도<br>정확히 알아듣고 바로 처리합니다.</p>
-                    </div>
-                    
-                    <!-- 범용 호환성 카드 -->
-                    <div class="group relative bg-gradient-to-br from-purple-50 via-white to-pink-50 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-purple-500/30 transform hover:scale-105 hover:-translate-y-4">
-                        <!-- 이미지 영역 -->
-                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500/20 to-pink-500/30 rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 mx-auto">
-                            <!-- 여러 앱 아이콘들 -->
-                            <div class="grid grid-cols-2 gap-1">
-                                <div class="w-3 h-3 bg-red-500 rounded-sm"></div>
-                                <div class="w-3 h-3 bg-blue-500 rounded-sm"></div>
-                                <div class="w-3 h-3 bg-green-500 rounded-sm"></div>
-                                <div class="w-3 h-3 bg-yellow-500 rounded-sm"></div>
-                            </div>
-                        </div>
-                        
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-purple-600 transition-colors duration-300 text-center">하나면 충분해요</h3>
-                        <p class="text-gray-600 leading-relaxed text-lg text-center">배달부터 택시, 쇼핑부터 금융까지<br>수십 개 앱을 오가며 하던 일을<br>이제 한 곳에서 모두 해결하세요.</p>
-                    </div>
-                    
-                    <!-- 프라이버시 우선 카드 -->
-                    <div class="group relative bg-gradient-to-br from-green-50 via-white to-emerald-50 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-green-500/30 transform hover:scale-105 hover:-translate-y-4">
-                        <!-- 이미지 영역 -->
-                        <div class="w-20 h-20 bg-gradient-to-br from-green-500/20 to-emerald-500/30 rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 mx-auto">
-                            <!-- 방패와 자물쇠 조합 -->
-                            <div class="relative">
-                                <div class="w-10 h-12 bg-green-600 rounded-t-full rounded-b-lg flex items-center justify-center">
-                                    <div class="w-4 h-4 bg-white rounded-full flex items-center justify-center">
-                                        <div class="w-2 h-2 bg-green-600 rounded-full"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-green-600 transition-colors duration-300 text-center">안전이 최우선</h3>
-                        <p class="text-gray-600 leading-relaxed text-lg text-center">결제나 중요한 정보가 필요할 땐<br>반드시 사용자 확인 후에만 진행하고,<br>모든 데이터는 안전하게 보호됩니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        
-        <!-- 실제 사용 시나리오 섹션 -->
-        <section id="how-it-works" class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-12 md:py-20 lg:py-32 px-4 sm:px-6 lg:px-8 section-fade-in">
-            <!-- 개선된 하루 시나리오 섹션 -->
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12 md:mb-16">
-                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-                        <span class="text-gray-800">하루가 </span>
-                        <span class="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">이렇게</span>
-                        <span class="text-gray-800"> 바뀌어요.</span>
-                    </h2>
-                    <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
-                        실제 사용자들의 일상 속 ManoLab AI 활용법을 살펴보세요!
-                    </p>
-                </div>
-                
-                <!-- 타임라인 -->
-                <div class="relative">
-                    <!-- 세로 라인 (모바일에서는 숨김) -->
-                    <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-200 via-purple-200 to-green-200 rounded-full hidden lg:block"></div>
-                    
-                    <div class="space-y-12 md:space-y-16 lg:space-y-20">
-                        <!-- 아침 8시 -->
-                        <div class="relative">
-                            <!-- 타임 도트 (모바일에서는 숨김) -->
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-500 rounded-full border-4 border-white shadow-xl z-10 hidden lg:block"></div>
-                            
-                            <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-0">
-                                <!-- 컨텐츠 -->
-                                <div class="w-full lg:w-1/2 lg:pr-10 order-2 lg:order-1">
-                                    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-blue-100 hover:shadow-2xl transition duration-300">
-                                        <div class="text-blue-600 font-black text-lg md:text-xl mb-3">🌅 오전 8시</div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">출근길 준비 완료</h3>
-                                        <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
-                                            "오늘 날씨 어때?<br>평소 마시던 커피 주문하고 택시 불러줘."
-                                        </p>
-                                        <div class="bg-blue-50 rounded-xl px-4 py-2 inline-block">
-                                            <div class="text-xs md:text-sm text-blue-700 font-bold">
-                                                ⚡ 5분 → 30초로 단축
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- 이모지 -->
-                                <div class="w-full lg:w-1/2 lg:pl-10 text-center order-1 lg:order-2">
-                                    <div class="text-5xl md:text-6xl lg:text-7xl">☕🚗</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 오후 12시 -->
-                        <div class="relative">
-                            <!-- 타임 도트 (모바일에서는 숨김) -->
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-purple-500 rounded-full border-4 border-white shadow-xl z-10 hidden lg:block"></div>
-                            
-                            <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-0">
-                                <!-- 이모지 -->
-                                <div class="w-full lg:w-1/2 lg:pr-10 text-center order-1">
-                                    <div class="text-5xl md:text-6xl lg:text-7xl">🍽️🎯</div>
-                                </div>
-                                
-                                <!-- 컨텐츠 -->
-                                <div class="w-full lg:w-1/2 lg:pl-10 order-2">
-                                    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-purple-100 hover:shadow-2xl transition duration-300">
-                                        <div class="text-purple-600 font-black text-lg md:text-xl mb-3">🌞 오후 12시</div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">점심 고민 끝</h3>
-                                        <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
-                                            "점심 뭐 먹지? 맛있는 곳으로 배달 시켜줘."
-                                        </p>
-                                        <div class="bg-purple-50 rounded-xl px-4 py-2 inline-block">
-                                            <div class="text-xs md:text-sm text-purple-700 font-bold">
-                                                ⚡ 메뉴 고민 시간 0초
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 저녁 8시 -->
-                        <div class="relative">
-                            <!-- 타임 도트 (모바일에서는 숨김) -->
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-green-500 rounded-full border-4 border-white shadow-xl z-10 hidden lg:block"></div>
-                            
-                            <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-0">
-                                <!-- 컨텐츠 -->
-                                <div class="w-full lg:w-1/2 lg:pr-10 order-2 lg:order-1">
-                                    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-green-100 hover:shadow-2xl transition duration-300">
-                                        <div class="text-green-600 font-black text-lg md:text-xl mb-3">🌙 오후 8시</div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">퇴근 후 자동 정리</h3>
-                                        <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
-                                            "오늘 쓴 돈 정리하고 내일 일정 확인해줘."
-                                        </p>
-                                        <div class="bg-green-50 rounded-xl px-4 py-2 inline-block">
-                                            <div class="text-xs md:text-sm text-green-700 font-bold">
-                                                ⚡ 하루 마무리를 간단하게
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- 이모지 -->
-                                <div class="w-full lg:w-1/2 lg:pl-10 text-center order-1 lg:order-2">
-                                    <div class="text-5xl md:text-6xl lg:text-7xl">📊✅</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        
-        <!-- 세련된 Testimonials Section -->
-        <section class="bg-gradient-to-br from-gray-50 to-blue-50 py-20 md:py-32 px-4 sm:px-6 lg:px-8 section-fade-in">
-            <div class="text-center mb-16">
-                    <h2 class="text-4xl lg:text-5xl font-bold mb-6">
-                        <span class="text-gray-800"> 실제</span>
-                        <span class="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">사용자</span>
-                        <span class="text-gray-800"> 이야기</span>
-                    </h2>
-                    <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
-                        다양한 분야의 전문가들이 경험한 ManoLab의 진짜 가치
-                    </p>
-                </div>
-                
-                <div class="max-w-7xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                        <!-- 의사 후기 -->
-                        <div class="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                            <!-- 상단 헤더 -->
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center">
-                                    <div class="relative">
-                                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg">
-                                            윤
-                                        </div>
-                                        <div class="absolute -bottom-1 -right-1 bg-blue-100 rounded-full p-1">
-                                            <span class="text-blue-600 text-xs">🩺</span>
-                                        </div>
-                                    </div>
-                                    <div class="ml-4">
-                                        <div class="font-bold text-gray-900">윤혁기</div>
-                                        <div class="text-sm text-gray-500">의사</div>
-                                    </div>
-                                </div>
-                                <div class="text-yellow-400 text-lg">★★★★★</div>
-                            </div>
-                            
-                            <!-- 메인 후기 -->
-                            <blockquote class="mb-6">
-                                <p class="text-gray-700 text-lg leading-relaxed font-medium mb-3">
-                                    "야근 중에도 음성으로 배달 주문하고<br>택시 호출까지 바로 처리돼요."
-                                </p>
-                                <p class="text-gray-600 text-sm">
-                                    병원 업무 중 간단한 명령어로 모든 일상 업무를<br>자동화할 수 있어서 정말 편합니다.
-                                </p>
-                            </blockquote>
-                            
-                            <!-- 하단 정보 -->
-                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                                <div class="flex gap-2">
-                                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-xs font-medium">일정관리</span>
-                                    <span class="px-3 py-1 bg-gray-50 text-gray-700 rounded-lg text-xs font-medium">업무효율</span>
-                                </div>
-                                <div class="text-xs text-gray-400">2개월 사용</div>
-                            </div>
-                        </div>
-
-                        <!-- 개발자 후기 -->
-                        <div class="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                            <!-- 상단 헤더 -->
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center">
-                                    <div class="relative">
-                                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold shadow-lg">
-                                            김
-                                        </div>
-                                        <div class="absolute -bottom-1 -right-1 bg-purple-100 rounded-full p-1">
-                                            <span class="text-purple-600 text-xs">💻</span>
-                                        </div>
-                                    </div>
-                                    <div class="ml-4">
-                                        <div class="font-bold text-gray-900">김재환</div>
-                                        <div class="text-sm text-gray-500">개발자</div>
-                                    </div>
-                                </div>
-                                <div class="text-yellow-400 text-lg">★★★★★</div>
-                            </div>
-                            
-                            <!-- 메인 후기 -->
-                            <blockquote class="mb-6">
-                                <p class="text-gray-700 text-lg leading-relaxed font-medium mb-3">
-                                    "코딩 중에 폰을 안 보고도<br>치킨 주문, 커피 주문 다 해결돼요."
-                                </p>
-                                <p class="text-gray-600 text-sm">
-                                    개발 집중력을 깨지 않으면서도 필요한 모든 것들을<br>처리할 수 있어서 생산성이 크게 향상됐습니다.
-                                </p>
-                            </blockquote>
-                            
-                            <!-- 하단 정보 -->
-                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                                <div class="flex gap-2">
-                                    <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-lg text-xs font-medium">생산성</span>
-                                    <span class="px-3 py-1 bg-gray-50 text-gray-700 rounded-lg text-xs font-medium">집중력</span>
-                                </div>
-                                <div class="text-xs text-gray-400">3개월 사용</div>
-                            </div>
-                        </div>
-
-                        <!-- CEO 후기 -->
-                        <div class="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                            <!-- 상단 헤더 -->
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center">
-                                    <div class="relative">
-                                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white text-xl font-bold shadow-lg">
-                                            이
-                                        </div>
-                                        <div class="absolute -bottom-1 -right-1 bg-green-100 rounded-full p-1">
-                                            <span class="text-green-600 text-xs">👔</span>
-                                        </div>
-                                    </div>
-                                    <div class="ml-4">
-                                        <div class="font-bold text-gray-900">이진구</div>
-                                        <div class="text-sm text-gray-500">스타트업 대표</div>
-                                    </div>
-                                </div>
-                                <div class="text-yellow-400 text-lg">★★★★★</div>
-                            </div>
-                            
-                            <!-- 메인 후기 -->
-                            <blockquote class="mb-6">
-                                <p class="text-gray-700 text-lg leading-relaxed font-medium mb-3">
-                                    "회식 예약부터 출장 일정까지<br>말 한 마디로 모든 게 자동화돼요."
-                                </p>
-                                <p class="text-gray-600 text-sm">
-                                    비서 없이도 모든 업무 관리가 완벽하게 처리되어서<br>핵심 업무에만 집중할 수 있게 되었습니다.
-                                </p>
-                            </blockquote>
-                            
-                            <!-- 하단 정보 -->
-                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                                <div class="flex gap-2">
-                                    <span class="px-3 py-1 bg-green-50 text-green-700 rounded-lg text-xs font-medium">경영효율</span>
-                                    <span class="px-3 py-1 bg-gray-50 text-gray-700 rounded-lg text-xs font-medium">시간절약</span>
-                                </div>
-                                <div class="text-xs text-gray-400">1개월 사용</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Balanced Sign-up & FAQ Section -->
-        <section id="signup" class="py-24 px-4 bg-gradient-to-br from-gray-50 to-blue-50 section-fade-in">
-            <div class="max-w-7xl mx-auto">
-                <!-- 헤더 -->
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                        <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            지금 시작하세요.
-                        </span>
-                    </h2>
-                    <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
-                        단순한 작업들을 자동화하고, 정말 중요한 일에 집중하세요.
-                    </p>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch"> <!-- items-start를 items-stretch로 변경 -->
-                    <!-- 왼쪽: Sign-up -->
-                    <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">사전 등록</h3>
-                        
-                        <form id="signup-form" class="space-y-6 mb-8 flex-grow">
-                            <!-- 기본 정보 -->
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                                    이름 <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="name" 
-                                    required
-                                    placeholder="홍길동"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
-                                >
-                            </div>
-
-                            <div>
-                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
-                                    휴대폰 번호 <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="tel" 
-                                    id="phone"
-                                    required
-                                    placeholder="010-1234-5678"
-                                    maxlength="13"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
-                                >
-                            </div>
-                            
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                                    이메일 주소 <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="email" 
-                                    id="email" 
-                                    required
-                                    placeholder="your@email.com"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
-                                >
-                            </div>
-                            
-                            <!-- 약관 동의 -->
-                            <div class="space-y-3 border-t pt-4">
-                                <div class="flex items-start">
-                                    <input 
-                                        type="checkbox" 
-                                        id="privacy-consent" 
-                                        required
-                                        class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                    >
-                                    <label for="privacy-consent" class="ml-2 text-sm text-gray-700">
-                                        <span class="text-red-500">*</span>
-                                        <a href="https://jealous-slip-81b.notion.site/ManoLab-20fb610d72e0807696bcd7adc1018c57" 
-                                        target="_blank" 
-                                        class="text-blue-600 hover:underline">개인정보 수집 및 이용</a>에 동의합니다.
-                                    </label>
-                                </div>
-                                
-                                <div class="flex items-start">
-                                    <input 
-                                        type="checkbox" 
-                                        id="marketing-consent"
-                                        class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                                    >
-                                    <label for="marketing-consent" class="ml-2 text-sm text-gray-700">
-                                        마케팅 정보 수신에 동의합니다. (선택)
-                                        <span class="block text-xs text-gray-500 mt-1">
-                                            제품 출시, 이벤트 등 유용한 정보를 받아보실 수 있습니다.
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            
-                            <button 
-                                type="submit" 
-                                class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                            >
-                                사전 등록하기
-                            </button>
-                        </form>
-                        <!-- 하단 고정 정보 -->
-                        <div class="mt-auto pt-6 border-t text-center">
-                            <p class="text-base font-medium text-gray-500 mb-2">
-                                🎁 사전 등록자 특별 혜택
-                            </p>
-                            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
-                                <p class="text-lg font-semibold text-blue-700">
-                                    정식 출시 시 영구 80% 할인
-                                </p>
-                                <p class="text-xs text-gray-600 mt-1">
-                                    베타 테스트 (2025.10) 완전 무료 + 평생 할인 혜택
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 오른쪽: FAQ -->
-                    <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">자주 묻는 질문</h3>
-
-                        <div class="space-y-4">
-                            <div class="faq-item bg-white/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 border border-white/20">
-                                <button class="faq-question w-full p-6 flex justify-between items-center text-lg font-semibold text-gray-900 hover:bg-white/30 transition duration-300 focus:outline-none">
-                                    <span>🤖 어떤 앱들을 지원하나요?</span>
-                                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
-                                    <p class="leading-relaxed">네이버 지도, 카카오택시, 배달의 민족, 쿠팡, 요기요 등 일상에서 자주 사용하는 주요 앱들을 지원합니다.<br>
-                                        베타 출시 후 사용자 피드백을 바탕으로 지원 앱을 지속적으로 확장해 나갈 예정입니다.</p>
-                                </div>
-                            </div>
-
-                            <div class="faq-item bg-white/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 border border-white/20">
-                                <button class="faq-question w-full p-6 flex justify-between items-center text-lg font-semibold text-gray-900 hover:bg-white/30 transition duration-300 focus:outline-none">
-                                    <span>💰 베타 버전은 무료인가요? 정식 버전 가격은?</span>
-                                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
-                                    <p class="leading-relaxed">베타 버전은 완전 무료로 제공됩니다. 정식 출시 후에는 월 구독 방식으로 운영되며,<br>
-                                        사전 등록자에게는 80% 할인 혜택을 제공합니다. 구체적인 가격은 베타 테스트 결과를 바탕으로 공정하게 책정할 예정입니다.</p>
-                                </div>
-                            </div>
-
-                            <div class="faq-item bg-white/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 border border-white/20">
-                                <button class="faq-question w-full p-6 flex justify-between items-center text-lg font-semibold text-gray-900 hover:bg-white/30 transition duration-300 focus:outline-none">
-                                    <span>📱 어떤 폰에서 사용할 수 있나요?</span>
-                                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
-                                    <p class="leading-relaxed">안드로이드 8.0 이상에서 사용 가능하며, iOS 버전은 2026년 상반기 출시 예정입니다.<br>
-                                        설치는 일반 앱처럼 간단하며, 처음 설정도 5분 이내에 완료할 수 있도록 설계했습니다.</p>
-                                </div>
-                            </div>
-
-                            <div class="faq-item bg-white/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 border border-white/20">
-                                <button class="faq-question w-full p-6 flex justify-between items-center text-lg font-semibold text-gray-900 hover:bg-white/30 transition duration-300 focus:outline-none">
-                                    <span>🔒 개인정보와 보안은 안전한가요?</span>
-                                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
-                                    <p class="leading-relaxed">모든 데이터는 국제 표준 암호화 기술로 보호되며, 최소한의 필요 정보만 수집합니다.<br>
-                                        사용자의 명시적 동의 없이는 어떤 개인정보도 외부에 공유되지 않으며, 언제든지 데이터 삭제를 요청할 수 있습니다.</p>
-                                </div>
-                            </div>
-
-                            <div class="faq-item bg-white/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 border border-white/20">
-                                <button class="faq-question w-full p-6 flex justify-between items-center text-lg font-semibold text-gray-900 hover:bg-white/30 transition duration-300 focus:outline-none">
-                                    <span>⚠️ AI가 잘못 주문하거나 실수하면 어떻게 하나요?</span>
-                                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
-                                    <p class="leading-relaxed">걱정하지 마세요! ManoLab은 3단계 안전장치를 제공합니다.<br>
-                                        ① 모든 주문/결제 전 사용자 확인 절차 필수<br>
-                                        ② 실행 취소 기능으로 즉시 작업 중단 가능<br>
-                                        ③ 24시간 고객지원으로 문제 발생 시 즉시 해결<br>
-                                        또한 베타 기간 중 발생한 실수로 인한 손해는 100% 보상해드립니다.</p>
-                                </div>
-                            </div>
-
-                            <div class="faq-item bg-white/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 border border-white/20">
-                                <button class="faq-question w-full p-6 flex justify-between items-center text-lg font-semibold text-gray-900 hover:bg-white/30 transition duration-300 focus:outline-none">
-                                    <span>📅 베타 테스트는 언제, 어떻게 참여하나요?</span>
-                                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                                <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
-                                    <p class="leading-relaxed">2025년 10월부터 베타 테스트가 시작되며, 사전 등록자 순서대로 초대 링크를 발송합니다.<br>
-                                        별도 신청 절차 없이 사전 등록만 하시면 자동으로 베타 테스터가 됩니다.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Enhanced Footer -->
-    <footer class="bg-gradient-to-r from-gray-900 to-black text-gray-300 py-16 px-4 sm:px-6 lg:px-8">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="text-3xl font-bold text-white mb-4">ManoLab</div>
-                    <p class="text-gray-400 leading-relaxed">AI가 당신을 대신합니다.<br>당신의 시간은 소중하니까.</p>
-                    <div class="mt-4 text-sm text-blue-400 font-medium">
-                        베타 준비 중 | 2025년 10월 출시
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-white font-semibold mb-4">제품</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#top" class="hover:text-white transition duration-300">ManoLab 소개</a></li>
-                        <li><a href="#signup" class="hover:text-white transition duration-300">베타 신청</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-white font-semibold mb-4">지원</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#signup" class="hover:text-white transition duration-300">FAQ</a></li>
-                        <li><a href="mailto:contact@manolab.com" class="hover:text-white transition duration-300">문의하기</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-white font-semibold mb-4">법적 고지</h3>
-                    <ul class="space-y-2">
-                        <li><a href="https://jealous-slip-81b.notion.site/ManoLab-20fb610d72e0807696bcd7adc1018c57" class="hover:text-white transition duration-300">개인정보처리방침</a></li>
-                        <li><a href="https://jealous-slip-81b.notion.site/ManoLab-20fb610d72e08075bb02ff8923efdad9" class="hover:text-white transition duration-300">이용약관</a></li>
-                        <li><a href="mailto:contact@manolab.com" class="hover:text-white transition duration-300">contact@manolab.com</a></li>
-                    </ul>
-                </div>
             </div>
             
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p>&copy; 2025 ManoLab. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="https://www.linkedin.com/in/hyuk-ki-yoon-014764336/" class="text-gray-400 hover:text-white transition duration-300" title="LinkedIn">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300" title="Twitter">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/hyuk_brian/" class="text-gray-400 hover:text-white transition duration-300" title="Instagram">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
-                        </svg>
-                    </a>
+            <!-- 타임라인 -->
+            <div class="relative">
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-200 via-purple-200 to-green-200 rounded-full hidden lg:block"></div>
+                
+                <div class="space-y-12 md:space-y-16 lg:space-y-20" id="timeline">
+                    <!-- JavaScript로 동적 생성 -->
                 </div>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script>  
-        // Enhanced JavaScript with new simulation features
+    <!-- 사용자 후기 섹션 -->
+    <section class="bg-gradient-to-br from-gray-50 to-blue-50 py-20 md:py-32 px-4 sm:px-6 lg:px-8 section-fade">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                <span class="text-gray-800"> 실제</span>
+                <span class="gradient-text">사용자</span>
+                <span class="text-gray-800"> 이야기</span>
+            </h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
+                다양한 분야의 전문가들이 경험한 ManoLab의 진짜 가치
+            </p>
+        </div>
+        
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="testimonials">
+                <!-- JavaScript로 동적 생성 -->
+            </div>
+        </div>
+    </section>
 
-        // New Simulation System
-        const heroChatInput = document.getElementById('hero-chat-input');
-        const heroSendButton = document.getElementById('hero-send-button');
-        const heroChatContainer = document.getElementById('hero-chat-container');
+    <!-- 사전 등록 & FAQ 섹션 -->
+    <section id="signup" class="py-24 px-4 bg-gradient-to-br from-gray-50 to-blue-50 section-fade">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    <span class="gradient-text">지금 시작하세요!</span>
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
+                    단순한 작업들을 자동화하고, 정말 중요한 일에 집중하세요.
+                </p>
+            </div>
 
-        // Simulation scenarios data
-        const simulationScenarios = {
-            '스타벅스': {
-                keywords: ['스타벅스', '커피', '아메리카노', '카페', '라떼'],
-                steps: [
-                    {
-                        type: 'analysis',
-                        message: 'ManoLab AI가 사용자의 명령을 분석하고 "스타벅스 앱"을 실행합니다...',
-                        delay: 2000,
-                        bgColor: 'bg-blue-50'
-                    },
-                    {
-                        type: 'question',
-                        message: 'ManoLab AI가 "스타벅스 앱"을 실행합니다. 늘 주문하시던 "강남역점"에서 "개인컵"으로 "아이스 아메리카노 톨 사이즈"를 "스타벅스 카드"로 결제할까요? ("응" 또는 "아니"로 답변해주세요.)',
-                        delay: 1000,
-                        bgColor: 'bg-yellow-50',
-                        waitForUser: true
-                    },
-                    {
-                        type: 'processing',
-                        message: 'ManoLab AI가 "스타벅스 앱"에서 결제를 진행합니다...',
-                        delay: 3000,
-                        bgColor: 'bg-purple-50'
-                    },
-                    {
-                        type: 'success',
-                        message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n"강남역점" 스타벅스 아이스 아메리카노 주문이 완료되었습니다. 예상 픽업 시간: 10분 후.',
-                        delay: 1000,
-                        bgColor: 'bg-green-50'
-                    }
-                ]
-            },
-            '배송': {
-                keywords: ['배송', '택배', '옷', '쿠팡', '배송지', '회사'],
-                steps: [
-                    {
-                        type: 'analysis',
-                        message: 'ManoLab AI가 사용자의 명령을 분석하고 "쿠팡 앱"을 실행합니다...',
-                        delay: 2000,
-                        bgColor: 'bg-blue-50'
-                    },
-                    {
-                        type: 'question',
-                        message: 'ManoLab AI가 "쿠팡 앱"을 실행합니다. 배송지를 기존 주소에서 "강남구 테헤란로 15, ManoLab 오피스"로 변경하고 배송 현황을 조회할까요? ("응" 또는 "아니"로 답변해주세요.)',
-                        delay: 1000,
-                        bgColor: 'bg-yellow-50',
-                        waitForUser: true
-                    },
-                    {
-                        type: 'processing',
-                        message: 'ManoLab AI가 "쿠팡 앱"에서 배송지 변경 및 배송 현황을 조회합니다...',
-                        delay: 4000,
-                        bgColor: 'bg-purple-50'
-                    },
-                    {
-                        type: 'success',
-                        message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n주문하신 옷의 배송지가 "ManoLab 오피스"로 변경되었으며, 현재 "강남 물류센터"에서 출고되어 오늘 오후 늦게 배송될 예정입니다.',
-                        delay: 1000,
-                        bgColor: 'bg-green-50'
-                    }
-                ]
-            },
-            '병원': {
-                keywords: ['병원', '진료', '예약', '피부과', '의사', '비대면'],
-                steps: [
-                    {
-                        type: 'analysis',
-                        message: 'ManoLab AI가 사용자의 명령을 분석하고 "닥터나우 앱"을 실행합니다...',
-                        delay: 2000,
-                        bgColor: 'bg-blue-50'
-                    },
-                    {
-                        type: 'question',
-                        message: 'ManoLab AI가 "닥터나우 앱"을 실행합니다. "브라이언 윤"님의 계정으로 오늘 저녁 7시 "피부과" 전문의 "김미영 의사"에게 비대면 진료를 예약할까요? ("응" 또는 "아니"로 답변해주세요.)',
-                        delay: 1000,
-                        bgColor: 'bg-yellow-50',
-                        waitForUser: true
-                    },
-                    {
-                        type: 'processing',
-                        message: 'ManoLab AI가 "닥터나우 앱"에서 진료 예약을 진행합니다...',
-                        delay: 3000,
-                        bgColor: 'bg-purple-50'
-                    },
-                    {
-                        type: 'success',
-                        message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n오늘 저녁 7시 "김미영 의사"와의 피부과 비대면 진료 예약이 완료되었습니다. 진료 10분 전 알림을 드릴까요?',
-                        delay: 1000,
-                        bgColor: 'bg-green-50',
-                        hasFollowUp: true
-                    },
-                    {
-                        type: 'success',
-                        message: 'ManoLab AI가 알림 설정을 완료했습니다.',
-                        delay: 1000,
-                        bgColor: 'bg-green-50'
-                    }
-                ]
-            },
-            '음식': {
-                keywords: ['배달', '치킨', '피자', '음식', '배달의민족', '요기요'],
-                steps: [
-                    {
-                        type: 'analysis',
-                        message: 'ManoLab AI가 사용자의 명령을 분석하고 "배달의민족 앱"을 실행합니다...',
-                        delay: 2000,
-                        bgColor: 'bg-blue-50'
-                    },
-                    {
-                        type: 'question',
-                        message: 'ManoLab AI가 "배달의민족 앱"을 실행합니다. 평소 즐겨드시는 "교촌치킨"에서 "허니콤보 + 콜라"를 주문할까요? ("응" 또는 "아니"로 답변해주세요.)',
-                        delay: 1000,
-                        bgColor: 'bg-yellow-50',
-                        waitForUser: true
-                    },
-                    {
-                        type: 'processing',
-                        message: 'ManoLab AI가 "배달의민족 앱"에서 주문을 진행합니다...',
-                        delay: 3000,
-                        bgColor: 'bg-purple-50'
-                    },
-                    {
-                        type: 'success',
-                        message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n교촌치킨 허니콤보 주문이 완료되었습니다. 예상 배달 시간: 35분 후.',
-                        delay: 1000,
-                        bgColor: 'bg-green-50'
-                    }
-                ]
-            },
-            '택시': {
-                keywords: ['택시', '우버', '카카오택시', '타다', '이동', '집', '회사', '호출'],
-                steps: [
-                    {
-                        type: 'analysis',
-                        message: 'ManoLab AI가 사용자의 명령을 분석하고 "카카오 T 앱"을 실행합니다...',
-                        delay: 2000,
-                        bgColor: 'bg-blue-50'
-                    },
-                    {
-                        type: 'question',
-                        message: 'ManoLab AI가 "카카오 T 앱"을 실행합니다. 현재 위치에서 "강남구 테헤란로 15, ManoLab 오피스"까지 일반 택시를 호출할까요? (예상 요금: 8,500원) ("응" 또는 "아니"로 답변해주세요.)',
-                        delay: 1000,
-                        bgColor: 'bg-yellow-50',
-                        waitForUser: true
-                    },
-                    {
-                        type: 'processing',
-                        message: 'ManoLab AI가 "카카오 T 앱"에서 택시를 호출합니다...',
-                        delay: 4000,
-                        bgColor: 'bg-purple-50'
-                    },
-                    {
-                        type: 'success',
-                        message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n택시가 호출되었습니다. 기사님이 3분 후 도착 예정입니다. (차량번호: 서울12가1234)',
-                        delay: 1000,
-                        bgColor: 'bg-green-50'
-                    }
-                ]
-            }
-        };
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+                <!-- 사전 등록 폼 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">사전 등록</h3>
+                    
+                    <form id="signup-form" class="space-y-6 mb-8 flex-grow">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                                이름 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="name" required placeholder="홍길동" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white">
+                        </div>
 
-        // Message type styles
-        const messageStyles = {
-            user: {
-                icon: '👤',
-                bgClass: 'bg-gray-100 text-gray-800',
-                align: 'ml-auto'
-            },
-            analysis: {
-                icon: '🔍',
-                bgClass: 'bg-blue-100 text-blue-800',
-                align: 'mr-auto'
-            },
-            question: {
-                icon: '❓',
-                bgClass: 'bg-yellow-100 text-yellow-800',
-                align: 'mr-auto'
-            },
-            processing: {
-                icon: '⚙️',
-                bgClass: 'bg-purple-100 text-purple-800',
-                align: 'mr-auto'
-            },
-            success: {
-                icon: '✅',
-                bgClass: 'bg-green-100 text-green-800',
-                align: 'mr-auto'
-            }
-        };
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                                휴대폰 번호 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="tel" id="phone" required placeholder="010-1234-5678" maxlength="13" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                이메일 주소 <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" id="email" required placeholder="your@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white">
+                        </div>
+                        
+                        <!-- 약관 동의 -->
+                        <div class="space-y-3 border-t pt-4">
+                            <div class="flex items-start">
+                                <input type="checkbox" id="privacy-consent" required class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <label for="privacy-consent" class="ml-2 text-sm text-gray-700">
+                                    <span class="text-red-500">*</span>
+                                    <a href="https://jealous-slip-81b.notion.site/ManoLab-20fb610d72e0807696bcd7adc1018c57" target="_blank" class="text-blue-600 hover:underline">개인정보 수집 및 이용</a>에 동의합니다.
+                                </label>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <input type="checkbox" id="marketing-consent" class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <label for="marketing-consent" class="ml-2 text-sm text-gray-700">
+                                    마케팅 정보 수신에 동의합니다. (선택)
+                                    <span class="block text-xs text-gray-500 mt-1">
+                                        제품 출시, 이벤트 등 유용한 정보를 받아보실 수 있습니다.
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            사전 등록하기
+                        </button>
+                    </form>
 
-        // Current scenario state
-        let currentScenario = null;
-        let currentStepIndex = 0;
-        let isWaitingForUser = false;
-
-        // Add message function
-        function addMessage(text, type = 'user', animate = true) {
-            const style = messageStyles[type];
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `flex mb-4 ${animate ? 'opacity-0' : ''}`;
-            
-            messageDiv.innerHTML = `
-                <div class="max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${style.bgClass} ${style.align}">
-                    <div class="flex items-start space-x-2">
-                        <span class="text-lg">${style.icon}</span>
-                        <div class="text-sm leading-relaxed whitespace-pre-line">${text}</div>
+                    <!-- 혜택 정보 -->
+                    <div class="mt-auto pt-6 border-t text-center">
+                        <p class="text-base font-medium text-gray-500 mb-2">🎁 사전 등록자 특별 혜택</p>
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
+                            <p class="text-lg font-semibold text-blue-700">정식 출시 시 영구 80% 할인</p>
+                            <p class="text-xs text-gray-600 mt-1">베타 테스트 (2025.10) 완전 무료 + 평생 할인 혜택</p>
+                        </div>
                     </div>
                 </div>
-            `;
+
+                <!-- FAQ -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">자주 묻는 질문</h3>
+                    <div class="space-y-4" id="faq-container">
+                        <!-- JavaScript로 동적 생성 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- 푸터 -->
+<footer class="bg-gradient-to-r from-gray-900 to-black text-gray-300 py-16 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <div class="text-3xl font-bold text-white mb-4">ManoLab</div>
+                <p class="text-gray-400 leading-relaxed">AI가 당신을 대신합니다.<br>당신의 시간은 소중하니까.</p>
+                <div class="mt-4 text-sm text-blue-400 font-medium">베타 준비 중 | 2025년 10월 출시</div>
+            </div>
+            <div>
+                <h3 class="text-white font-semibold mb-4">제품</h3>
+                <ul class="space-y-2">
+                    <li><a href="#top" class="hover:text-white transition duration-300">ManoLab 소개</a></li>
+                    <li><a href="#signup" class="hover:text-white transition duration-300">베타 신청</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-semibold mb-4">지원</h3>
+                <ul class="space-y-2">
+                    <li><a href="#signup" class="hover:text-white transition duration-300">FAQ</a></li>
+                    <li><a href="mailto:contact@manolab.com" class="hover:text-white transition duration-300">문의하기</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-semibold mb-4">법적 고지</h3>
+                <ul class="space-y-2">
+                    <li><a href="https://jealous-slip-81b.notion.site/ManoLab-20fb610d72e0807696bcd7adc1018c57" class="hover:text-white transition duration-300">개인정보처리방침</a></li>
+                    <li><a href="https://jealous-slip-81b.notion.site/ManoLab-20fb610d72e08075bb02ff8923efdad9" class="hover:text-white transition duration-300">이용약관</a></li>
+                    <li><a href="mailto:contact@manolab.com" class="hover:text-white transition duration-300">contact@manolab.com</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2025 ManoLab. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="https://www.linkedin.com/in/hyuk-ki-yoon-014764336/" class="text-gray-400 hover:text-white transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/hyuk_brian/" class="text-gray-400 hover:text-white transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// 🎯 통합된 데이터 객체
+const AppData = {
+    // 명령어 예시
+    commands: [
+        { icon: '☕', color: 'blue', text: '"스타벅스에서 늘 마시던 아이스 아메리카노 주문해 줘"' },
+        { icon: '🍔', color: 'red', text: '"수제버거 하나만 주문하고 싶은데 배달비 최소금액 맞춰서 주문해줘"' },
+        { icon: '📦', color: 'purple', text: '"방금 주문한 옷, 배송지를 회사로 바꾸고 어디쯤 오는지 알려줘"' },
+        { icon: '🏥', color: 'green', text: '"오늘 저녁에 비대면 진료로 피부과 의사 예약해 줘"' },
+        { icon: '🍗', color: 'orange', text: '"교촌치킨 허니콤보 배달 주문해 줘"' },
+        { icon: '🚕', color: 'yellow', text: '"회사까지 택시 호출해 줘"' },
+        { icon: '📝', color: 'indigo', text: '"방금 먹은 식당에서 네이버 영수증 리뷰 써서 음료수 받고 싶어"' },
+        { icon: '🏝️', color: 'teal', text: '"제주도 3박4일 숙소 찾아줘, 바다 보이는 곳으로"' }
+    ],
+
+    // 특징
+    features: [
+        {
+            title: '말만 해도 척척',
+            desc: '이전 주문과 취향을 기억해서<br>\'평소 마시던 거 주문해줘\'만 말해도<br>정확히 알아듣고 바로 처리합니다.',
+            icon: '⚡',
+            color: 'blue'
+        },
+        {
+            title: '하나면 충분해요',
+            desc: '배달부터 택시, 쇼핑부터 금융까지<br>수십 개 앱을 오가며 하던 일을<br>이제 한 곳에서 모두 해결하세요.',
+            icon: '🎯',
+            color: 'purple'
+        },
+        {
+            title: '안전이 최우선',
+            desc: '결제나 중요한 정보가 필요할 땐<br>반드시 사용자 확인 후에만 진행하고,<br>모든 데이터는 안전하게 보호됩니다.',
+            icon: '🔒',
+            color: 'green'
+        }
+    ],
+
+    // 타임라인
+    timeline: [
+        { time: '🌅 오전 8시', title: '출근길 준비 완료', desc: '"오늘 날씨 어때?<br>평소 마시던 커피 주문하고 택시 불러줘."', benefit: '5분 → 30초로 단축', emoji: '☕🚗', color: 'blue' },
+        { time: '🌞 오후 12시', title: '점심 고민 끝', desc: '"점심 뭐 먹지? 맛있는 곳으로 배달 시켜줘."', benefit: '메뉴 고민 시간 0초', emoji: '🍽️🎯', color: 'purple' },
+        { time: '🌙 오후 8시', title: '퇴근 후 자동 정리', desc: '"오늘 쓴 돈 정리하고 내일 일정 확인해줘."', benefit: '하루 마무리를 간단하게', emoji: '📊✅', color: 'green' }
+    ],
+
+    // 후기
+    testimonials: [
+        { name: '윤혁기', job: '의사', emoji: '🩺', review: '"야근 중에도 음성으로 배달 주문하고<br>택시 호출까지 바로 처리돼요."', detail: '병원 업무 중 간단한 명령어로 모든 일상 업무를<br>자동화할 수 있어서 정말 편합니다.', tags: ['일정관리', '업무효율'], period: '2개월 사용', color: 'blue' },
+        { name: '김재환', job: '개발자', emoji: '💻', review: '"코딩 중에 폰을 안 보고도<br>치킨 주문, 커피 주문 다 해결돼요."', detail: '개발 집중력을 깨지 않으면서도 필요한 모든 것들을<br>처리할 수 있어서 생산성이 크게 향상됐습니다.', tags: ['생산성', '집중력'], period: '3개월 사용', color: 'purple' },
+        { name: '이진구', job: '스타트업 대표', emoji: '👔', review: '"회식 예약부터 출장 일정까지<br>말 한 마디로 모든 게 자동화돼요."', detail: '비서 없이도 모든 업무 관리가 완벽하게 처리되어서<br>핵심 업무에만 집중할 수 있게 되었습니다.', tags: ['경영효율', '시간절약'], period: '1개월 사용', color: 'green' }
+    ],
+
+    // FAQ
+    faqs: [
+        { q: '🤖 어떤 앱들을 지원하나요?', a: '네이버 지도, 카카오택시, 배달의 민족, 쿠팡, 요기요 등 일상에서 자주 사용하는 주요 앱들을 지원합니다.<br>베타 출시 후 사용자 피드백을 바탕으로 지원 앱을 지속적으로 확장해 나갈 예정입니다.' },
+        { q: '💰 베타 버전은 무료인가요? 정식 버전 가격은?', a: '베타 버전은 완전 무료로 제공됩니다. 정식 출시 후에는 월 구독 방식으로 운영되며,<br>사전 등록자에게는 80% 할인 혜택을 제공합니다. 구체적인 가격은 베타 테스트 결과를 바탕으로 공정하게 책정할 예정입니다.' },
+        { q: '📱 어떤 폰에서 사용할 수 있나요?', a: '안드로이드 8.0 이상에서 사용 가능하며, iOS 버전은 2026년 상반기 출시 예정입니다.<br>설치는 일반 앱처럼 간단하며, 처음 설정도 5분 이내에 완료할 수 있도록 설계했습니다.' },
+        { q: '🔒 개인정보와 보안은 안전한가요?', a: '모든 데이터는 국제 표준 암호화 기술로 보호되며, 최소한의 필요 정보만 수집합니다.<br>사용자의 명시적 동의 없이는 어떤 개인정보도 외부에 공유되지 않으며, 언제든지 데이터 삭제를 요청할 수 있습니다.' },
+        { q: '⚠️ AI가 잘못 주문하거나 실수하면 어떻게 하나요?', a: '걱정하지 마세요! ManoLab은 3단계 안전장치를 제공합니다.<br>① 모든 주문/결제 전 사용자 확인 절차 필수<br>② 실행 취소 기능으로 즉시 작업 중단 가능<br>③ 24시간 고객지원으로 문제 발생 시 즉시 해결<br>또한 베타 기간 중 발생한 실수로 인한 손해는 100% 보상해드립니다.' },
+        { q: '📅 베타 테스트는 언제, 어떻게 참여하나요?', a: '2025년 10월부터 베타 테스트가 시작되며, 사전 등록자 순서대로 초대 링크를 발송합니다.<br>별도 신청 절차 없이 사전 등록만 하시면 자동으로 베타 테스터가 됩니다.' }
+    ],
+
+    // 시나리오
+    scenarios: {
+        '스타벅스': {
+            keywords: ['스타벅스', '커피', '아메리카노', '카페', '라떼'],
+            steps: [
+                { type: 'analysis', message: 'ManoLab AI가 사용자의 명령을 분석하고 "스타벅스 앱"을 실행합니다...', delay: 2000 },
+                { type: 'question', message: 'ManoLab AI가 "스타벅스 앱"을 실행합니다. 늘 주문하시던 "강남역점"에서 "개인컵"으로 "아이스 아메리카노 톨 사이즈"를 "스타벅스 카드"로 결제할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '샷 추가나 시럽 변경은 어떻게 하시겠어요? 평소와 동일하게 "바닐라 시럽 추가"로 주문할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 "스타벅스 앱"에서 결제를 진행합니다...', delay: 3000 },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n"강남역점" 스타벅스 아이스 아메리카노(바닐라 시럽 추가) 주문이 완료되었습니다. 예상 픽업 시간: 10분 후.\n\n💰 결제 금액: 4,500원 (스타벅스 카드)', delay: 1000 }
+            ]
+        },
+        '수제버거': {
+            keywords: ['버거', '수제버거', '배달비', '최소주문', '햄버거'],
+            steps: [
+                { type: 'analysis', message: 'ManoLab AI가 "배달의민족", "요기요", "쿠팡이츠" 앱을 동시에 실행하여 최적의 조건을 찾고 있습니다...', delay: 2500 },
+                { type: 'question', message: '3개 앱을 비교한 결과:\n\n📱 배달의민족: "버거킹" - 최소주문 12,000원 (부족 2,000원)\n📱 요기요: "맘스터치" - 최소주문 15,000원 (부족 5,000원)\n📱 쿠팡이츠: "수제버거 맛집" - 최소주문 8,000원 (달성!)\n\n"쿠팡이츠"의 "수제버거 맛집"에서 "클래식 치즈버거(9,500원)"를 주문할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '배달비를 절약하기 위해 "감자튀김(3,000원)"을 추가하시겠어요? 총 12,500원으로 배달비가 무료가 됩니다. ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 "쿠팡이츠 앱"에서 주문을 진행합니다...', delay: 3000 },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n수제버거 맛집에서 "클래식 치즈버거 + 감자튀김" 주문 완료!\n\n💰 총 금액: 12,500원 (배달비 무료)\n🚚 예상 배달 시간: 40분 후\n\n⚡ 일반적으로 5분 넘게 앱 비교하며 헤맬 시간을 30초로 단축했습니다!', delay: 1000 }
+            ]
+        },
+        '배송': {
+            keywords: ['배송', '택배', '옷', '쿠팡', '배송지', '회사'],
+            steps: [
+                { type: 'analysis', message: 'ManoLab AI가 사용자의 최근 주문을 분석하고 "쿠팡 앱"을 실행합니다...', delay: 2000 },
+                { type: 'question', message: 'ManoLab AI가 "쿠팡 앱"을 확인한 결과, 어제 주문하신 "유니클로 맨투맨"이 발견되었습니다. 배송지를 기존 "자택"에서 "강남구 테헤란로 15, ManoLab 오피스"로 변경할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '배송 요청사항을 "경비실에 맡겨주세요"로 추가하시겠어요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 "쿠팡 앱"에서 배송지 변경 및 배송 현황을 조회합니다...', delay: 4000 },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n\n📦 유니클로 맨투맨 배송 정보 업데이트:\n📍 배송지: "ManoLab 오피스"로 변경 완료\n📝 요청사항: "경비실에 맡겨주세요" 추가\n🚚 현재 상태: "강남 물류센터" 출고됨\n⏰ 예상 도착: 오늘 오후 5시 전', delay: 1000 }
+            ]
+        },
+        '병원': {
+            keywords: ['병원', '진료', '예약', '피부과', '의사', '비대면'],
+            steps: [
+                { type: 'analysis', message: 'ManoLab AI가 "닥터나우", "굿닥", "메디히어" 앱을 확인하여 최적의 의사를 찾고 있습니다...', delay: 2500 },
+                { type: 'question', message: '3개 앱을 비교한 결과:\n\n👩‍⚕️ 닥터나우: "김미영 피부과 전문의" - 오늘 7시 예약 가능\n👨‍⚕️ 굿닥: "이준호 피부과 전문의" - 오늘 8시 예약 가능\n👩‍⚕️ 메디히어: "박수진 피부과 전문의" - 내일 9시 예약 가능\n\n"김미영 의사"와 오늘 저녁 7시 비대면 진료를 예약할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '진료 사유를 "여드름 상담 및 치료"로 기재할까요? 추가 증상이나 특이사항이 있으시면 말씀해주세요. ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 "닥터나우 앱"에서 진료 예약을 진행합니다...', delay: 3000 },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n\n👩‍⚕️ 김미영 피부과 전문의와 비대면 진료 예약 완료\n⏰ 예약 시간: 오늘 저녁 7시\n💰 진료비: 25,000원\n📱 진료 방법: 앱 내 화상통화\n\n🔔 진료 10분 전 알림을 설정할까요?', delay: 1000, hasFollowUp: true },
+                { type: 'success', message: 'ManoLab AI가 진료 10분 전 알림 설정을 완료했습니다. 📲', delay: 1000 }
+            ]
+        },
+        '음식': {
+            keywords: ['배달', '치킨', '피자', '음식', '배달의민족', '요기요'],
+            steps: [
+                { type: 'analysis', message: 'ManoLab AI가 사용자의 주문 히스토리를 분석하고 "배달의민족 앱"을 실행합니다...', delay: 2000 },
+                { type: 'question', message: 'ManoLab AI가 분석한 결과, 평소 즐겨드시는 "교촌치킨"에서 "허니콤보"를 자주 주문하시네요. 오늘도 같은 메뉴로 주문할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '음료는 평소처럼 "콜라 1.25L"로 추가하시겠어요? 아니면 다른 음료를 원하시나요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 "배달의민족 앱"에서 주문을 진행합니다...', delay: 3000 },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n\n🍗 교촌치킨 허니콤보 + 콜라 1.25L 주문 완료\n💰 총 금액: 24,500원\n🚚 예상 배달 시간: 35분 후\n📍 배달 주소: 기존 등록 주소\n💳 결제 방법: 등록된 카드로 자동 결제', delay: 1000 }
+            ]
+        },
+        '택시': {
+            keywords: ['택시', '우버', '카카오택시', '타다', '이동', '집', '회사', '호출'],
+            steps: [
+                { type: 'analysis', message: 'ManoLab AI가 "카카오 T", "우버", "타다" 앱을 동시에 확인하여 최적 조건을 찾고 있습니다...', delay: 2500 },
+                { type: 'question', message: '3개 앱 비교 결과:\n\n🚕 카카오 T: 일반택시 - 3분 후 도착, 예상요금 8,500원\n🚗 우버: 우버X - 5분 후 도착, 예상요금 9,200원\n🚙 타다: 타다 베이직 - 7분 후 도착, 예상요금 8,800원\n\n가장 빠른 "카카오 T 일반택시"를 호출할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '기사님께 전달할 메시지가 있으신가요? "건물 정문에서 대기하겠습니다"라고 전달할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 "카카오 T 앱"에서 택시를 호출합니다...', delay: 4000 },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n\n🚕 택시 호출 완료!\n🚗 차량 정보: 서울12가1234 (현대 아반떼)\n👨‍💼 기사님: 김기사님 (★4.9)\n⏰ 도착 예정: 3분 후\n💰 예상 요금: 8,500원\n📱 실시간 위치 추적 중...', delay: 1000 }
+            ]
+        },
+        '네이버리뷰': {
+            keywords: ['네이버', '리뷰', '영수증', '음료수', '서비스'],
+            steps: [
+                { type: 'analysis', message: 'ManoLab AI가 현재 위치를 파악하고 "네이버 지도" 앱을 실행합니다...', delay: 2000 },
+                { type: 'question', message: 'ManoLab AI가 현재 위치 "치락골순대 대전문지점"을 감지했습니다. 이 식당에서 네이버 영수증 리뷰를 작성해서 음료수 서비스를 받으시겠어요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '네이버 지도 앱에서 영수증 리뷰 탭을 클릭할게요. ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: '영수증 스캔 완료! 리뷰 작성 페이지로 이동합니다...', delay: 3500 },
+                { type: 'question', message: '리뷰를 자동 작성했습니다:\n\n⭐⭐⭐⭐⭐ "제 인생 순대국이에요... 매주 한번은 꼭 와서 먹어요! 사장님 번창하세요👍"\n\n이 리뷰로 등록할까요? 수정하시겠어요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n\n📝 네이버 영수증 리뷰 등록 완료\n⭐ 평점: 5점\n\n⚡ 평소 5분 넘게 리뷰 탭 찾아 헤맬 시간을 20초로 단축!', delay: 1000 }
+            ]
+        },
+        '제주도숙소': {
+            keywords: ['제주도', '숙소', '바다', '호텔', '펜션', '여행'],
+            steps: [
+                { type: 'analysis', message: 'ManoLab AI가 "에어비앤비", "야놀자", "여기어때", "부킹닷컴", "아고다" 앱을 동시에 검색하여 최적의 숙소를 찾고 있습니다...', delay: 3000 },
+                { type: 'question', message: '5개 앱에서 "바다 전망" 숙소를 찾았습니다:\n\n🏨 야놀자: "제주 오션뷰 펜션" - 1박 12만원\n🏡 에어비앤비: "성산일출봉 앞 독채" - 1박 15만원\n🏖️ 여기어때: "협재해수욕장 리조트" - 1박 18만원\n\n가성비 좋은 "제주 오션뷰 펜션"으로 3박 예약할까요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '체크인 날짜를 다음 주 금요일(3월 15일)부터 월요일(3월 18일)까지 3박 4일로 설정할까요? 다른 날짜를 원하시나요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '렌터카도 함께 예약하시겠어요? "제주공항"에서 픽업 가능한 소형차(1일 3만원)를 찾았습니다. ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 "야놀자"에서 숙소 예약과 렌터카 예약을 동시에 진행합니다...', delay: 4000 },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n\n🏨 제주 오션뷰 펜션 예약 완료\n📅 체크인: 3월 15일 (금) 15:00\n📅 체크아웃: 3월 18일 (월) 11:00\n💰 숙박비: 36만원 (3박)\n\n🚗 렌터카 예약 완료\n🚙 차종: 현대 아반떼 (소형)\n📍 픽업: 제주공항 1층\n💰 렌터카: 9만원 (3일)\n\n⚡ 평소 수많은 앱 헤매며 1시간 넘게 걸릴 일을 2분으로 단축!', delay: 1000 }
+            ]
+        }
+    }
+};
+
+// 🎯 통합된 유틸리티 클래스
+class Utils {
+    static createElement(tag, className, innerHTML = '') {
+        const el = document.createElement(tag);
+        if (className) el.className = className;
+        if (innerHTML) el.innerHTML = innerHTML;
+        return el;
+    }
+
+    static animateCounter(element, target, duration = 1200, prefix = '', suffix = '') {
+        let start = 0;
+        const startTime = performance.now();
+        
+        const easeOutExpo = (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = easeOutExpo(progress);
+            const current = Math.floor(start + (target - start) * easedProgress);
             
-            heroChatContainer.appendChild(messageDiv);
+            element.textContent = `${prefix}${current.toLocaleString()}${suffix}`;
             
-            if (animate) {
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                // 완료 효과
+                element.style.transform = 'scale(1.1)';
+                element.style.transition = 'transform 0.2s ease-out';
                 setTimeout(() => {
-                    messageDiv.classList.remove('opacity-0');
-                    messageDiv.classList.add('transition-opacity', 'duration-500');
+                    element.style.transform = 'scale(1)';
+                    setTimeout(() => element.style.transition = '', 200);
                 }, 100);
             }
-            
-            heroChatContainer.scrollTop = heroChatContainer.scrollHeight;
         }
+        
+        requestAnimationFrame(updateCounter);
+    }
 
-        // Find scenario function
-        function findScenario(userInput) {
-            const input = userInput.toLowerCase();
-            
-            // Check for more specific keywords first
-            for (const [key, scenario] of Object.entries(simulationScenarios)) {
-                // For taxi scenario, check for specific taxi keywords
-                if (key === '택시' && (input.includes('택시') || input.includes('호출') || input.includes('카카오'))) {
-                    return key;
-                }
-                
-                // For delivery scenario, check for specific delivery keywords  
-                if (key === '배송' && (input.includes('배송') || input.includes('택배') || input.includes('쿠팡')) && !input.includes('택시') && !input.includes('호출')) {
-                    return key;
-                }
-                
-                // For other scenarios, use original logic
-                if (key !== '택시' && key !== '배송' && scenario.keywords.some(keyword => input.includes(keyword))) {
-                    return key;
+    static formatPhoneNumber(value) {
+        const numbers = value.replace(/[^\d]/g, '');
+        if (numbers.length <= 3) return numbers;
+        if (numbers.length <= 7) return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+        if (numbers.length <= 11) return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7)}`;
+        return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7, 11)}`;
+    }
+}
+
+// 🎯 간소화된 카운터 클래스
+class RealTimeCounter {
+    constructor() {
+        this.url = 'https://script.google.com/macros/s/AKfycbwr3VWP34LNVMIGr25vOjFQuFmgK59GPyCoihGysYIDRwduCJtzpvvnR4T1E1EcGQeP/exec';
+        this.element = document.getElementById('hero-user-counter');
+        this.lastCount = 0;
+        this.isFirstLoad = true;
+    }
+
+    async fetchCount() {
+        try {
+            const response = await fetch(`${this.url}?action=getUserCount`);
+            const data = await response.json();
+            if (data.result === 'success') {
+                return data.userCount;
+            }
+        } catch (error) {
+            console.error('Error fetching count:', error);
+        }
+        return null;
+    }
+
+    async start() {
+        // 🚀 실제 API 값을 가져와서 0에서 그 값까지 애니메이션
+        const actualCount = await this.fetchCount();
+        
+        if (actualCount !== null) {
+            console.log('🚀 실제 API 값으로 즉시 애니메이션 시작:', 0, '→', actualCount);
+            Utils.animateCounter(this.element, actualCount);
+            this.lastCount = actualCount;
+            this.isFirstLoad = false;
+        } else {
+            // API 호출 실패시 기본값으로 애니메이션
+            console.log('⚠️ API 호출 실패, 기본값으로 애니메이션');
+            Utils.animateCounter(this.element, 2847);
+            this.lastCount = 2847;
+            this.isFirstLoad = false;
+        }
+        
+        // 주기적 업데이트
+        setInterval(async () => {
+            const newCount = await this.fetchCount();
+            if (newCount && newCount !== this.lastCount) {
+                console.log('🔄 카운터 업데이트:', this.lastCount, '→', newCount);
+                Utils.animateCounter(this.element, newCount, 1500);
+                this.lastCount = newCount;
+            }
+        }, 30000);
+    }
+}
+
+// 🎯 채팅 시뮬레이터 클래스
+class ChatSimulator {
+    constructor() {
+        this.container = document.getElementById('hero-chat-container');
+        this.input = document.getElementById('hero-chat-input');
+        this.button = document.getElementById('hero-send-button');
+        this.currentScenario = null;
+        this.stepIndex = 0;
+        this.waitingForUser = false;
+        
+        this.messageStyles = {
+            user: { icon: '👤', bgClass: 'bg-gray-100 text-gray-800', align: 'ml-auto' },
+            analysis: { icon: '🔍', bgClass: 'bg-blue-100 text-blue-800', align: 'mr-auto' },
+            question: { icon: '❓', bgClass: 'bg-yellow-100 text-yellow-800', align: 'mr-auto' },
+            processing: { icon: '⚙️', bgClass: 'bg-purple-100 text-purple-800', align: 'mr-auto' },
+            success: { icon: '✅', bgClass: 'bg-green-100 text-green-800', align: 'mr-auto' }
+        };
+        
+        this.initEvents();
+    }
+
+    initEvents() {
+        this.button?.addEventListener('click', () => this.handleInput());
+        this.input?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.handleInput();
+        });
+        
+        this.container?.addEventListener('click', (e) => {
+            if (e.target.tagName === 'P' && e.target.textContent.includes('"')) {
+                const command = e.target.textContent.match(/"([^"]+)"/);
+                if (command) {
+                    this.input.value = command[1];
+                    this.handleInput();
                 }
             }
-            return null;
-        }
+        });
+    }
 
-        // Run scenario function
-        async function runScenario(scenarioKey) {
-            currentScenario = simulationScenarios[scenarioKey];
-            currentStepIndex = 0;
+    addMessage(text, type = 'user') {
+        const style = this.messageStyles[type];
+        const messageDiv = Utils.createElement('div', `flex mb-4 opacity-0`);
+        
+        messageDiv.innerHTML = `
+            <div class="max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${style.bgClass} ${style.align}">
+                <div class="flex items-start space-x-2">
+                    <span class="text-lg">${style.icon}</span>
+                    <div class="text-sm leading-relaxed whitespace-pre-line">${text}</div>
+                </div>
+            </div>
+        `;
+        
+        this.container.appendChild(messageDiv);
+        
+        setTimeout(() => {
+            messageDiv.classList.remove('opacity-0');
+            messageDiv.classList.add('transition-opacity', 'duration-500');
+        }, 100);
+        
+        this.container.scrollTop = this.container.scrollHeight;
+    }
+
+    findScenario(input) {
+        const lowerInput = input.toLowerCase();
+        
+        // 우선순위별로 체크
+        if (lowerInput.includes('제주도') || lowerInput.includes('숙소') || lowerInput.includes('여행')) return '제주도숙소';
+        if (lowerInput.includes('네이버') && (lowerInput.includes('리뷰') || lowerInput.includes('영수증'))) return '네이버리뷰';
+        if (lowerInput.includes('버거') || lowerInput.includes('수제버거') || lowerInput.includes('배달비')) return '수제버거';
+        if (lowerInput.includes('택시') || lowerInput.includes('호출') || lowerInput.includes('카카오')) return '택시';
+        if (lowerInput.includes('배송') || lowerInput.includes('택배') && !lowerInput.includes('택시')) return '배송';
+        if (lowerInput.includes('병원') || lowerInput.includes('진료') || lowerInput.includes('의사')) return '병원';
+        if (lowerInput.includes('스타벅스') || lowerInput.includes('커피') || lowerInput.includes('아메리카노')) return '스타벅스';
+        if (lowerInput.includes('치킨') || lowerInput.includes('피자') || lowerInput.includes('배달')) return '음식';
+        
+        return null;
+    }
+
+    async runScenario(scenarioKey) {
+        this.currentScenario = AppData.scenarios[scenarioKey];
+        this.stepIndex = 0;
+        
+        for (let i = 0; i < this.currentScenario.steps.length; i++) {
+            const step = this.currentScenario.steps[i];
+            this.stepIndex = i;
             
-            for (let i = 0; i < currentScenario.steps.length; i++) {
-                const step = currentScenario.steps[i];
-                currentStepIndex = i;
+            if (step.waitForUser) this.waitingForUser = true;
+            
+            await new Promise(resolve => {
+                setTimeout(() => {
+                    this.addMessage(step.message, step.type);
+                    
+                    if (step.waitForUser) {
+                        resolve();
+                    } else if (step.hasFollowUp && i === this.currentScenario.steps.length - 2) {
+                        setTimeout(() => {
+                            this.addMessage('응', 'user');
+                            setTimeout(resolve, 500);
+                        }, 2000);
+                    } else {
+                        resolve();
+                    }
+                }, step.delay);
+            });
+            
+            if (step.waitForUser) break;
+        }
+        
+        if (!this.waitingForUser) {
+            setTimeout(() => this.resetToInitial(), 4000);
+        }
+    }
+
+    async handleUserResponse(input) {
+        if (!this.waitingForUser || !this.currentScenario) return false;
+        
+        const response = input.toLowerCase().trim();
+        if (['응', '네', 'yes', 'y'].includes(response)) {
+            this.waitingForUser = false;
+            this.stepIndex++;
+            
+            // 다음 단계들 실행
+            for (let i = this.stepIndex; i < this.currentScenario.steps.length; i++) {
+                const step = this.currentScenario.steps[i];
                 
+                // 또 다른 사용자 입력이 필요한 단계인지 확인
                 if (step.waitForUser) {
-                    isWaitingForUser = true;
+                    this.waitingForUser = true;
+                    this.stepIndex = i;
                 }
                 
                 await new Promise(resolve => {
                     setTimeout(() => {
-                        addMessage(step.message, step.type);
-                        heroChatContainer.className = heroChatContainer.className.replace(/bg-\w+-50/g, '') + ` ${step.bgColor}`;
+                        this.addMessage(step.message, step.type);
                         
                         if (step.waitForUser) {
-                            // Wait for user response
+                            // 사용자 입력 대기
                             resolve();
-                        } else if (step.hasFollowUp && i === currentScenario.steps.length - 2) {
-                            // Automatically add "응" response
+                        } else if (step.hasFollowUp && i === this.currentScenario.steps.length - 2) {
+                            // 자동 "응" 답변
                             setTimeout(() => {
-                                addMessage('응', 'user');
-                                setTimeout(() => {
-                                    resolve();
-                                }, 500);
+                                this.addMessage('응', 'user');
+                                setTimeout(resolve, 500);
                             }, 2000);
                         } else {
                             resolve();
@@ -1270,221 +807,414 @@
                     }, step.delay);
                 });
                 
-                if (step.waitForUser) {
-                    break; // Wait for user input
-                }
+                // 사용자 입력이 필요하면 여기서 중단
+                if (step.waitForUser) break;
             }
             
-            // If scenario completed without waiting for user, reset after delay
-            if (!isWaitingForUser) {
-                setTimeout(() => {
-                    resetToInitialScreen();
-                }, 4000);
+            // 모든 단계가 끝났고 더 이상 사용자 입력이 필요없으면 리셋
+            if (!this.waitingForUser) {
+                this.currentScenario = null;
+                setTimeout(() => this.resetToInitial(), 4000);
             }
+            
+            return true;
+        } else if (['아니', '아니요', 'no', 'n'].includes(response)) {
+            this.waitingForUser = false;
+            this.currentScenario = null;
+            
+            setTimeout(() => {
+                this.addMessage('AI가 작업을 종료합니다. 다른 방법을 원하시면 언제든 말씀해주세요!', 'analysis');
+                setTimeout(() => this.resetToInitial(), 3000);
+            }, 1000);
+            return true;
         }
+        return false;
+    }
 
-        // Handle user response function
-        async function handleUserResponse(input) {
-            if (!isWaitingForUser || !currentScenario) return false;
-            
-            const response = input.toLowerCase().trim();
-            if (response === '응' || response === '네' || response === 'yes' || response === 'y') {
-                isWaitingForUser = false;
-                currentStepIndex++;
-                
-                // Execute remaining steps
-                for (let i = currentStepIndex; i < currentScenario.steps.length; i++) {
-                    const step = currentScenario.steps[i];
-                    
-                    await new Promise(resolve => {
-                        setTimeout(() => {
-                            addMessage(step.message, step.type);
-                            heroChatContainer.className = heroChatContainer.className.replace(/bg-\w+-50/g, '') + ` ${step.bgColor}`;
-                            
-                            if (step.hasFollowUp && i === currentScenario.steps.length - 2) {
-                                // Automatically add "응" response
-                                setTimeout(() => {
-                                    addMessage('응', 'user');
-                                    setTimeout(() => {
-                                        resolve();
-                                    }, 500);
-                                }, 2000);
-                            } else {
-                                resolve();
-                            }
-                        }, step.delay);
-                    });
-                }
-                
-                currentScenario = null;
-                
-                // Reset to initial screen after completion
-                setTimeout(() => {
-                    resetToInitialScreen();
-                }, 4000);
-                
-                return true;
-            } else if (response === '아니' || response === '아니요' || response === 'no' || response === 'n') {
-                isWaitingForUser = false;
-                currentScenario = null;
-                
-                setTimeout(() => {
-                    addMessage('AI가 작업을 종료합니다.', 'analysis');
-                    heroChatContainer.className = heroChatContainer.className.replace(/bg-\w+-50/g, '') + ' bg-gray-50';
-                    
-                    // Reset to initial screen after cancellation
-                    setTimeout(() => {
-                        resetToInitialScreen();
-                    }, 3000);
-                }, 1000);
-                
-                return true;
-            }
-            
+    async handleInput() {
+        const input = this.input.value.trim();
+        if (!input) return;
+        
+        this.addMessage(input, 'user');
+        this.input.value = '';
+        
+        if (this.container.querySelector('.text-center')) {
+            this.container.innerHTML = '';
+            this.addMessage(input, 'user');
+        }
+        
+        if (this.waitingForUser) {
+            const handled = await this.handleUserResponse(input);
+            if (handled) return;
+        }
+        
+        const scenarioKey = this.findScenario(input);
+        if (scenarioKey) {
+            await this.runScenario(scenarioKey);
+        } else {
+            setTimeout(() => {
+                this.addMessage('추천 명령어를 사용해보세요!', 'analysis');
+                setTimeout(() => this.resetToInitial(), 2000);
+            }, 1500);
+        }
+    }
+
+    resetToInitial() {
+        this.renderInitialScreen();
+        this.currentScenario = null;
+        this.stepIndex = 0;
+        this.waitingForUser = false;
+    }
+
+    renderInitialScreen() {
+        // 모든 명령어 표시
+        const commands = AppData.commands.map(cmd => `
+            <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-${cmd.color}-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-${cmd.color}-200 transition-colors">
+                        <span class="text-${cmd.color}-600">${cmd.icon}</span>
+                    </div>
+                    <p class="text-sm text-gray-700 group-hover:text-gray-900">${cmd.text}</p>
+                </div>
+            </div>
+        `).join('');
+
+        this.container.innerHTML = `
+            <div class="text-center text-gray-500 py-6">
+                <div class="w-16 h-16 mx-auto mb-4 gradient-bg rounded-2xl flex items-center justify-center shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <p class="text-lg font-semibold text-gray-700 mb-1">ManoLab AI와 대화해보세요!</p>
+                <p class="text-sm text-gray-500 mb-6">아래 예시 명령어를 클릭하거나 직접 입력해보세요.</p>
+                <div class="space-y-3 text-left max-h-80 overflow-y-auto pr-2">${commands}</div>
+                <p class="text-xs text-gray-400 mt-4">💡 스크롤해서 더 많은 명령어를 확인하세요!</p>
+            </div>
+        `;
+    }
+}
+
+// 🎯 폼 핸들러 클래스  
+class FormHandler {
+    constructor() {
+        this.form = document.getElementById('signup-form');
+        this.phoneInput = document.getElementById('phone');
+        this.initEvents();
+    }
+
+    initEvents() {
+        // 폰 번호 포맷팅
+        this.phoneInput?.addEventListener('input', (e) => {
+            e.target.value = Utils.formatPhoneNumber(e.target.value);
+        });
+
+        // 폼 제출
+        this.form?.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    validate(data) {
+        if (!data.name || !data.phone || !data.email || !data.privacyConsent) {
+            alert('필수 항목을 모두 입력해주세요.');
             return false;
         }
+        
+        if (!/^01[0-9]-[0-9]{4}-[0-9]{4}$/.test(data.phone)) {
+            alert('올바른 휴대폰 번호를 입력해주세요.');
+            return false;
+        }
+        
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+            alert('올바른 이메일 형식을 입력해주세요.');
+            return false;
+        }
+        
+        return true;
+    }
 
-        // Reset to initial screen function
-        function resetToInitialScreen() {
-            heroChatContainer.innerHTML = `
-                <div class="text-center text-gray-500 py-6">
-                    <!-- AI 아바타 개선 -->
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                        </svg>
+    setButtonLoading(button, isLoading, originalText = '사전 등록하기') {
+        if (isLoading) {
+            button.disabled = true;
+            button.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> 등록 중...';
+        } else {
+            button.disabled = false;
+            button.textContent = originalText;
+        }
+    }
+
+    showSuccessModal(name, waitingNumber) {
+        const modal = Utils.createElement('div', 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50');
+        modal.innerHTML = `
+            <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center shadow-2xl">
+                <div class="text-6xl mb-4">🎉</div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">등록 완료!</h3>
+                <p class="text-gray-600 mb-6">
+                    <span class="font-semibold">${name}</span>님은<br>
+                    <span class="font-bold text-blue-600 text-xl">${waitingNumber}번째 사전등록자</span>입니다!
+                </p>
+                <p class="text-sm text-gray-500 mb-6">베타 출시 소식을 가장 먼저 전해드리겠습니다.</p>
+                <button onclick="this.closest('.fixed').remove()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition duration-300">
+                    확인
+                </button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    async handleSubmit(e) {
+        e.preventDefault();
+        
+        const button = e.target.querySelector('button[type="submit"]');
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            email: document.getElementById('email').value.trim().toLowerCase(),
+            marketingConsent: document.getElementById('marketing-consent')?.checked || false,
+            privacyConsent: document.getElementById('privacy-consent').checked
+        };
+        
+        if (!this.validate(formData)) return;
+        
+        this.setButtonLoading(button, true);
+        
+        try {
+            const url = 'https://script.google.com/macros/s/AKfycbwr3VWP34LNVMIGr25vOjFQuFmgK59GPyCoihGysYIDRwduCJtzpvvnR4T1E1EcGQeP/exec';
+            const params = new URLSearchParams(formData);
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+            });
+            
+            const result = JSON.parse(await response.text());
+            
+            if (result.result === 'success') {
+                this.showSuccessModal(formData.name, result.waitingNumber);
+                this.form.reset();
+                
+                // 카운터 업데이트
+                setTimeout(async () => {
+                    if (window.realTimeCounter) {
+                        await window.realTimeCounter.start();
+                    }
+                }, 1000);
+            } else {
+                alert(`⚠️ ${result.message}`);
+            }
+        } catch (error) {
+            console.error('제출 오류:', error);
+            alert('⚠️ 등록 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        } finally {
+            this.setButtonLoading(button, false);
+        }
+    }
+}
+
+// 🎯 DOM 렌더러
+class DOMRenderer {
+    static renderCommands() {
+        const container = document.getElementById('command-examples');
+        if (!container) return;
+        
+        // 모든 명령어 표시 (8개)
+        container.innerHTML = AppData.commands.map(cmd => `
+            <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-${cmd.color}-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-${cmd.color}-200 transition-colors">
+                        <span class="text-${cmd.color}-600">${cmd.icon}</span>
                     </div>
-                    
-                    <p class="text-lg font-semibold text-gray-700 mb-1">ManoLab AI와 대화해보세요!</p>
-                    <p class="text-sm text-gray-500 mb-6">아래 예시 명령어를 클릭하거나 직접 입력해보세요.</p>
-                    
-                    <!-- 추천 명령어 카드 스타일 -->
-                    <div class="space-y-3 text-left">
-                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors">
-                                    <span class="text-blue-600">☕</span>
-                                </div>
-                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"스타벅스에서 늘 마시던 아이스 아메리카노 주문해 줘"</p>
+                    <p class="text-sm text-gray-700 group-hover:text-gray-900">${cmd.text}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    static renderFeatures() {
+        const container = document.getElementById('features-grid');
+        if (!container) return;
+        
+        container.innerHTML = AppData.features.map(feature => `
+            <div class="group relative bg-gradient-to-br from-${feature.color}-50 via-white to-purple-50 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-${feature.color}-500/30 transform hover:scale-105 hover:-translate-y-4">
+                <div class="w-20 h-20 bg-gradient-to-br from-${feature.color}-500/20 to-purple-500/30 rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 mx-auto">
+                    <span class="text-3xl">${feature.icon}</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 group-hover:text-${feature.color}-600 transition-colors duration-300 text-center">${feature.title}</h3>
+                <p class="text-gray-600 leading-relaxed text-lg text-center">${feature.desc}</p>
+            </div>
+        `).join('');
+    }
+
+    static renderTimeline() {
+        const container = document.getElementById('timeline');
+        if (!container) return;
+        
+        container.innerHTML = AppData.timeline.map((item, index) => {
+            const isEven = index % 2 === 1;
+            return `
+                <div class="relative">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-${item.color}-500 rounded-full border-4 border-white shadow-xl z-10 hidden lg:block"></div>
+                    <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-0">
+                        ${isEven ? `
+                            <div class="w-full lg:w-1/2 lg:pr-10 text-center order-1">
+                                <div class="text-5xl md:text-6xl lg:text-7xl">${item.emoji}</div>
                             </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-purple-200 transition-colors">
-                                    <span class="text-purple-600">📦</span>
+                            <div class="w-full lg:w-1/2 lg:pl-10 order-2">
+                        ` : `
+                            <div class="w-full lg:w-1/2 lg:pr-10 order-2 lg:order-1">
+                        `}
+                                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-blue-100 hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 cursor-pointer">
+                                    <div class="text-${item.color}-600 font-black text-lg md:text-xl mb-3">${item.time}</div>
+                                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">${item.title}</h3>
+                                    <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-4">${item.desc}</p>
+                                    <div class="bg-${item.color}-50 rounded-xl px-4 py-2 inline-block">
+                                        <div class="text-xs md:text-sm text-${item.color}-700 font-bold">⚡ ${item.benefit}</div>
+                                    </div>
                                 </div>
-                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"방금 주문한 옷, 배송지를 회사로 바꾸고 어디쯤 오는지 알려줘"</p>
                             </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
-                                    <span class="text-green-600">🏥</span>
-                                </div>
-                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"오늘 저녁에 비대면 진료로 피부과 의사 예약해 줘"</p>
+                        ${!isEven ? `
+                            <div class="w-full lg:w-1/2 lg:pl-10 text-center order-1 lg:order-2">
+                                <div class="text-5xl md:text-6xl lg:text-7xl">${item.emoji}</div>
                             </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-orange-200 transition-colors">
-                                    <span class="text-orange-600">🍗</span>
-                                </div>
-                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"교촌치킨 허니콤보 배달 주문해 줘"</p>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-200 transition-colors">
-                                    <span class="text-yellow-600">🚕</span>
-                                </div>
-                                <p class="text-sm text-gray-700 group-hover:text-gray-900">"회사까지 택시 호출해 줘"</p>
-                            </div>
-                        </div>
+                        ` : ''}
                     </div>
                 </div>
             `;
-            heroChatContainer.className = 'relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 mb-4 h-80 overflow-y-auto border border-gray-100';
-            currentScenario = null;
-            currentStepIndex = 0;
-            isWaitingForUser = false;
-        }
+        }).join('');
+    }
 
-        // Handle chat input function
-        async function handleChatInput() {
-            const input = heroChatInput.value.trim();
-            if (!input) return;
-            
-            // Add user message
-            addMessage(input, 'user');
-            heroChatInput.value = '';
-            
-            // Remove welcome message if present
-            if (heroChatContainer.querySelector('.text-center')) {
-                heroChatContainer.innerHTML = '';
-                addMessage(input, 'user', false);
-            }
-            
-            // Check if waiting for user response
-            if (isWaitingForUser) {
-                const handled = await handleUserResponse(input);
-                if (handled) return;
-            }
-            
-            // Find new scenario
-            const scenarioKey = findScenario(input);
-            if (scenarioKey) {
-                await runScenario(scenarioKey);
-            } else {
-                // Default response
-                setTimeout(() => {
-                    addMessage('추천 명령어를 사용해보세요!', 'analysis');
-                    
-                    // Reset to initial screen after 2 seconds
-                    setTimeout(() => {
-                        resetToInitialScreen();
-                    }, 2000);
-                }, 1500);
-            }
-        }
+    static renderTestimonials() {
+        const container = document.getElementById('testimonials');
+        if (!container) return;
+        
+        container.innerHTML = AppData.testimonials.map(testimonial => `
+            <div class="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:scale-105 hover:-translate-y-2 cursor-pointer">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <div class="relative">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-${testimonial.color}-500 to-${testimonial.color}-600 flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                                ${testimonial.name[0]}
+                            </div>
+                            <div class="absolute -bottom-1 -right-1 bg-${testimonial.color}-100 rounded-full p-1">
+                                <span class="text-${testimonial.color}-600 text-xs">${testimonial.emoji}</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-bold text-gray-900">${testimonial.name}</div>
+                            <div class="text-sm text-gray-500">${testimonial.job}</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 text-lg">★★★★★</div>
+                </div>
+                
+                <blockquote class="mb-6">
+                    <p class="text-gray-700 text-lg leading-relaxed font-medium mb-3">${testimonial.review}</p>
+                    <p class="text-gray-600 text-sm">${testimonial.detail}</p>
+                </blockquote>
+                
+                <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div class="flex gap-2">
+                        ${testimonial.tags.map(tag => `<span class="px-3 py-1 bg-${testimonial.color}-50 text-${testimonial.color}-700 rounded-lg text-xs font-medium">${tag}</span>`).join('')}
+                    </div>
+                    <div class="text-xs text-gray-400">${testimonial.period}</div>
+                </div>
+            </div>
+        `).join('');
+    }
 
-        // Event listeners for chat
-        if (heroSendButton) {
-            heroSendButton.addEventListener('click', handleChatInput);
-        }
+    static renderFAQ() {
+        const container = document.getElementById('faq-container');
+        if (!container) return;
+        
+        container.innerHTML = AppData.faqs.map(faq => `
+            <div class="faq-item bg-white/50 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 border border-white/20">
+                <button class="faq-question w-full p-6 flex justify-between items-center text-lg font-semibold text-gray-900 hover:bg-white/30 transition duration-300 focus:outline-none">
+                    <span>${faq.q}</span>
+                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                    <p class="leading-relaxed">${faq.a}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+}
 
-        if (heroChatInput) {
-            heroChatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    handleChatInput();
+// 🎯 앱 초기화
+class App {
+    constructor() {
+        this.counter = null;
+        this.chat = null;
+        this.form = null;
+        // async init을 별도로 호출
+        this.init();
+    }
+
+    async init() {
+        // DOM 렌더링
+        DOMRenderer.renderCommands();
+        DOMRenderer.renderFeatures();
+        DOMRenderer.renderTimeline();
+        DOMRenderer.renderTestimonials();
+        DOMRenderer.renderFAQ();
+
+        // 컴포넌트 초기화
+        this.counter = new RealTimeCounter();
+        this.chat = new ChatSimulator();
+        this.form = new FormHandler();
+
+        // 이벤트 리스너
+        this.initScrollEffects();
+        this.initFAQ();
+        this.initSmoothScroll();
+        
+        // 카운터 시작
+        await this.counter.start();
+        
+        // 전역 참조
+        window.realTimeCounter = this.counter;
+    }
+
+    initScrollEffects() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
-        }
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Click on recommended commands
-        heroChatContainer.addEventListener('click', (e) => {
-            if (e.target.tagName === 'P' && e.target.textContent.includes('"')) {
-                const command = e.target.textContent.match(/"([^"]+)"/);
-                if (command) {
-                    heroChatInput.value = command[1];
-                    handleChatInput();
-                }
-            }
+        document.querySelectorAll('.section-fade').forEach(section => {
+            observer.observe(section);
         });
 
-        // Enhanced FAQ Accordion
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
+        // 헤더 스크롤 효과
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        header.style.transition = 'transform 0.3s ease-in-out';
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+    }
+
+    initFAQ() {
+        document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
                 const answer = question.nextElementSibling;
                 const icon = question.querySelector('svg');
                 const isOpen = !answer.classList.contains('hidden');
 
-                // Close all other answers
-                faqQuestions.forEach(otherQuestion => {
+                // 다른 FAQ 닫기
+                document.querySelectorAll('.faq-question').forEach(otherQuestion => {
                     if (otherQuestion !== question) {
                         const otherAnswer = otherQuestion.nextElementSibling;
                         const otherIcon = otherQuestion.querySelector('svg');
@@ -1493,7 +1223,7 @@
                     }
                 });
 
-                // Toggle current answer
+                // 현재 FAQ 토글
                 if (isOpen) {
                     answer.classList.add('hidden');
                     icon.classList.remove('rotate-180');
@@ -1503,282 +1233,26 @@
                 }
             });
         });
+    }
 
-        // 휴대폰 번호 자동 하이픈 추가 함수
-        function formatPhoneNumber(value) {
-            // 숫자만 추출
-            const numbers = value.replace(/[^\d]/g, '');
-            
-            // 길이에 따라 하이픈 추가
-            if (numbers.length <= 3) {
-                return numbers;
-            } else if (numbers.length <= 7) {
-                return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
-            } else if (numbers.length <= 11) {
-                return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7)}`;
-            } else {
-                return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7, 11)}`;
-            }
-        }
-
-        // 휴대폰 입력 필드에 이벤트 리스너 추가
-        const phoneInput = document.getElementById('phone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function(e) {
-                const formatted = formatPhoneNumber(e.target.value);
-                e.target.value = formatted;
-            });
-            
-            // 붙여넣기 시에도 포맷팅
-            phoneInput.addEventListener('paste', function(e) {
-                e.preventDefault();
-                const pastedText = (e.clipboardData || window.clipboardData).getData('text');
-                e.target.value = formatPhoneNumber(pastedText);
-            });
-        }
-
-        // Enhanced Form Submission (기존 코드 교체)
-        const signupForm = document.getElementById('signup-form');
-        if (signupForm) {
-            signupForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const submitButton = e.target.querySelector('button[type="submit"]');
-                const originalButtonText = submitButton.textContent;
-                
-                // 폼 데이터 수집
-                const formData = {
-                    name: document.getElementById('name').value.trim(),
-                    phone: document.getElementById('phone').value.trim(),
-                    email: document.getElementById('email').value.trim().toLowerCase(),
-                    marketingConsent: document.getElementById('marketing-consent')?.checked || false,
-                    privacyConsent: document.getElementById('privacy-consent').checked
-                };
-                
-                // 유효성 검사
-                if (!formData.name || !formData.phone || !formData.email || !formData.privacyConsent) {
-                    alert('필수 항목을 모두 입력해주세요.');
-                    return;
-                }
-                
-                // 휴대폰 번호 형식 검증
-                const phoneRegex = /^01[0-9]-[0-9]{4}-[0-9]{4}$/;
-                if (!phoneRegex.test(formData.phone)) {
-                    alert('올바른 휴대폰 번호를 입력해주세요.');
-                    return;
-                }
-                
-                // 이메일 형식 검증
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(formData.email)) {
-                    alert('올바른 이메일 형식을 입력해주세요.');
-                    return;
-                }
-                
-                // 버튼 로딩 상태
-                submitButton.disabled = true;
-                submitButton.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> 등록 중...';
-                
-                try {
-                    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybUDqZdE695UVbvgWkk_-XUXswKV43-DdpEoJLBaqKWoKjD7arRKsV9i441n2PPpk3/exec';
-                    
-                    console.log('요청 데이터:', formData); // 디버깅용
-                    
-                    const response = await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'cors', // CORS 모드 명시적 설정
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(formData)
-                    });
-                    
-                    console.log('응답 상태:', response.status, response.statusText); // 디버깅용
-                    
-                    if (!response.ok) {
-                        throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
-                    }
-                    
-                    const result = await response.json();
-                    console.log('응답 데이터:', result); // 디버깅용
-                    
-                    if (result.result === 'success') {
-                        alert(`🎉 사전 등록이 완료되었습니다!\n\n${formData.name}님은 ${result.waitingNumber}번째 대기자입니다.\n\n베타 출시 소식을 가장 먼저 전해드리겠습니다.`);
-                        signupForm.reset();
-                    } else if (result.type === 'duplicate_email') {
-                        alert('이미 등록된 이메일 주소입니다.');
-                    } else if (result.type === 'duplicate_phone') {
-                        alert('이미 등록된 휴대폰 번호입니다.');
-                    } else if (result.type === 'duplicate_user') {
-                        alert('이미 등록하신 적이 있습니다.');
-                    } else {
-                        alert(`등록 중 오류가 발생했습니다.\n\n${result.message || '알 수 없는 오류'}`);
-                    }
-                    
-                } catch (error) {
-                    console.error('상세 에러 정보:', error);
-                    
-                    let errorMessage = '등록 중 오류가 발생했습니다.\n\n';
-                    
-                    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-                        errorMessage += '네트워크 연결을 확인해주세요.\n';
-                        errorMessage += '또는 Google Apps Script 배포 설정을 확인해주세요.';
-                    } else if (error.name === 'SyntaxError') {
-                        errorMessage += '서버 응답 형식에 문제가 있습니다.';
-                    } else {
-                        errorMessage += error.message;
-                    }
-                    
-                    alert(errorMessage + '\n\n문제가 지속되면 contact@manolab.com으로 문의해주세요.');
-                } finally {
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalButtonText;
-                }
-            });
-        }
-
-        // Scroll Animation Observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections with fade-in class
-        document.querySelectorAll('.section-fade-in').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Smooth scrolling for anchor links
+    initSmoothScroll() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-                closeMobileMenu();
             });
         });
+    }
+}
 
-        // Dynamic stats counter animation
-        function animateCounter(element, target, duration = 2000, prefix = '', suffix = '') {
-            let start = 0;
-            const startTime = performance.now();
-            
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                // Easing function for smooth animation
-                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                const current = Math.floor(start + (target - start) * easeOutQuart);
-                
-                // Format number with commas
-                const formattedNumber = current.toLocaleString();
-                element.textContent = `${prefix}${formattedNumber}${suffix}`;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                }
-            }
-            
-            requestAnimationFrame(updateCounter);
-        }
-
-        // Trigger animations when hero section is visible
-        const heroSection = document.getElementById('intro');
-        if (heroSection) {
-            const heroObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Animate task counter 
-                        const taskEl = document.getElementById('hero-task-counter');
-                        if (taskEl && !taskEl.dataset.animated) {
-                            animateCounter(taskEl, 1247, 2500, '', '');
-                            taskEl.dataset.animated = 'true';
-                        }
-                        heroObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            heroObserver.observe(heroSection);
-        }
-
-        // Trigger counter animations when signup section is visible
-        const signupSection = document.getElementById('signup');
-        if (signupSection) {
-            const signupObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const userCountEl = document.getElementById('user-count');
-                        if (userCountEl && !userCountEl.dataset.animated) {
-                            animateCounter(userCountEl, 2847);
-                            userCountEl.dataset.animated = 'true';
-                        }
-                        signupObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            signupObserver.observe(signupSection);
-        }
-
-        // Optional: Live counter that keeps increasing (for demo effect)
-        function startLiveCounter() {
-            const taskEl = document.getElementById('hero-task-counter');
-            if (taskEl) {
-                setInterval(() => {
-                    const currentValue = parseInt(taskEl.textContent.replace(/[^0-9]/g, ''));
-                    if (currentValue < 2000) {
-                        taskEl.textContent = (currentValue + 1).toLocaleString();
-                    }
-                }, 3000); // Increase every 3 seconds
-            }
-        }
-
-        // Start live counter for demo effect
-        setTimeout(startLiveCounter, 5000);
-
-        // Header scroll effect
-        let lastScrollTop = 0;
-        const header = document.querySelector('header');
-        
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                // Scrolling up
-                header.style.transform = 'translateY(0)';
-            }
-            
-            lastScrollTop = scrollTop;
-        });
-
-        // Add scroll transition to header
-        header.style.transition = 'transform 0.3s ease-in-out';
-
-        console.log('🚀 Enhanced ManoLab landing page loaded successfully!');   
-    </script>
+// 🚀 앱 시작
+document.addEventListener('DOMContentLoaded', async () => {
+    new App();
+    console.log('🚀 최적화된 ManoLab 랜딩페이지 로드 완료!');
+});
+</script>
 </body>
 </html>
-                
-                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.356-.012-.534A8.347 8.347 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.322 8.322 0 01-2.675 1.018 4.136 4.136 0 00-7.033 3.763 11.66 11.66 0 01-8.4-4.269 4.116 4.116 0 001.27 5.477A4.072 4.072 0 012 10.425v.053a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.12 4.12 0 003.834 2.85A8.233 8.233 0 012 18.188a11.644 11.644 0 006.29 1.84z"></path>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
