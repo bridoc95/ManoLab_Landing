@@ -32,7 +32,7 @@
         body { font-family: 'Inter', sans-serif; background: #ffffff; min-height: 100vh; }
         
         /* 통합된 글래스 효과 */
-        .glass { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.18); }
+        .glass { background: white; backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.18); }
         .nav-blur { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
         
         /* 통합된 그라디언트 */
@@ -50,7 +50,7 @@
         .section-fade.visible { opacity: 1; transform: translateY(0); }
         
         /* 채팅 스타일 */
-        .chat-container { background: linear-gradient(to-br, #f9fafb, white); }
+        .chat-container { background: white}
         .message { padding: 15px 20px; border-radius: 20px; margin: 10px 0; animation: fadeInUp 0.5s ease; }
         .message-ai { background: linear-gradient(135deg, #4F46E5, #818CF8); color: white; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); }
         .message-user { background: #f3f4f6; color: #1f2937; text-align: right; }
@@ -120,7 +120,7 @@
                                         <span class="text-xl">💰</span>
                                     </div>
                                     <div>
-                                        <div class="text-3xl font-bold text-primary">₩42,000</div>
+                                        <div class="text-3xl font-bold text-primary">₩50,000</div>
                                         <div class="text-sm font-medium text-gray-600">월 평균 절약</div>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@
                                         <span class="text-xl">⏱️</span>
                                     </div>
                                     <div>
-                                        <div class="text-3xl font-bold text-primary">34분</div>
+                                        <div class="text-3xl font-bold text-primary">10분</div>
                                         <div class="text-sm font-medium text-gray-600">하루 절약 시간</div>
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@
                         </div>
 
                         <!-- 채팅 인터페이스 -->
-                        <div id="hero-chat-container" class="chat-container rounded-2xl p-6 mb-4 h-80 overflow-y-auto border border-gray-100">
+                        <div id="hero-chat-container" class="chat-container rounded-2xl p-4 mb-4 h-96 overflow-y-auto border border-gray-100">
                             <div class="text-center text-gray-500 py-6">
                                 <div class="w-16 h-16 mx-auto mb-4 gradient-bg rounded-2xl flex items-center justify-center shadow-lg">
                                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,7 +183,7 @@
                                 <p class="text-sm text-gray-500 mb-6">아래 예시 명령어를 클릭하거나 직접 입력해보세요.</p>
                                 
                                 <!-- 간소화된 명령어 예시 -->
-                                <div class="space-y-3 text-left" id="command-examples">
+                                <div class="grid grid-cols-1 gap-3 text-left max-h-60 overflow-y-auto pr-2" id="command-examples">
                                     <!-- JavaScript로 동적 생성 -->
                                 </div>
                             </div>
@@ -538,11 +538,12 @@ const AppData = {
             keywords: ['네이버', '리뷰', '영수증', '음료수', '서비스'],
             steps: [
                 { type: 'analysis', message: 'ManoLab AI가 현재 위치를 파악하고 "네이버 지도" 앱을 실행합니다...', delay: 2000 },
-                { type: 'question', message: 'ManoLab AI가 현재 위치 "치락골순대 대전문지점"을 감지했습니다. 이 식당에서 네이버 영수증 리뷰를 작성해서 음료수 서비스를 받으시겠어요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
-                { type: 'question', message: '네이버 지도 앱에서 영수증 리뷰 탭을 클릭할게요. ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
-                { type: 'processing', message: '영수증 스캔 완료! 리뷰 작성 페이지로 이동합니다...', delay: 3500 },
-                { type: 'question', message: '리뷰를 자동 작성했습니다:\n\n⭐⭐⭐⭐⭐ "제 인생 순대국이에요... 매주 한번은 꼭 와서 먹어요! 사장님 번창하세요👍"\n\n이 리뷰로 등록할까요? 수정하시겠어요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
-                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n\n📝 네이버 영수증 리뷰 등록 완료\n⭐ 평점: 5점\n\n⚡ 평소 5분 넘게 리뷰 탭 찾아 헤맬 시간을 20초로 단축!', delay: 1000 }
+                { type: 'question', message: 'ManoLab AI가 현재 위치 "홍대 맛집거리"에서 "김치찌개 전문점"을 감지했습니다. 이 식당에서 네이버 영수증 리뷰를 작성해서 음료수 서비스를 받으시겠어요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'question', message: '영수증 번호를 입력해주세요. 테이블 위 영수증의 하단에 있는 번호를 말씀해주시거나, "자동으로 찾아줘"라고 하시면 AI가 영수증을 스캔해서 찾아드릴게요. ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 영수증을 스캔하고 "네이버 지도"에서 리뷰 작성 페이지로 이동합니다...', delay: 3500 },
+                { type: 'question', message: '리뷰를 자동 작성했습니다:\n\n⭐⭐⭐⭐⭐ "김치찌개가 정말 맛있어요! 반찬도 다양하고 사장님도 친절하세요. 재방문 의사 100%입니다 👍"\n\n이 리뷰로 등록할까요? 수정하시겠어요? ("응" 또는 "아니"로 답변해주세요.)', delay: 1000, waitForUser: true },
+                { type: 'processing', message: 'ManoLab AI가 네이버 영수증 리뷰를 등록하고 음료수 서비스를 요청합니다...', delay: 2000 },
+                { type: 'success', message: 'AI가 성공적으로 작업을 완료했습니다! 🎉\n\n📝 네이버 영수증 리뷰 등록 완료\n⭐ 평점: 5점\n🥤 음료수 서비스 쿠폰 발급됨\n💡 사장님께 음료수 서비스 요청 전달\n\n⚡ 평소 5분 넘게 리뷰 탭 찾아 헤맬 시간을 20초로 단축!', delay: 1000 }
             ]
         },
         '제주도숙소': {
@@ -686,10 +687,12 @@ class ChatSimulator {
         });
         
         this.container?.addEventListener('click', (e) => {
-            if (e.target.tagName === 'P' && e.target.textContent.includes('"')) {
-                const command = e.target.textContent.match(/"([^"]+)"/);
+            // 명령어 div를 클릭했을 때 처리
+            const commandDiv = e.target.closest('[data-command]');
+            if (commandDiv) {
+                const command = commandDiv.getAttribute('data-command');
                 if (command) {
-                    this.input.value = command[1];
+                    this.input.value = command;
                     this.handleInput();
                 }
             }
@@ -868,16 +871,19 @@ class ChatSimulator {
 
     renderInitialScreen() {
         // 모든 명령어 표시
-        const commands = AppData.commands.map(cmd => `
-            <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 bg-${cmd.color}-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-${cmd.color}-200 transition-colors">
-                        <span class="text-${cmd.color}-600">${cmd.icon}</span>
+        const commands = AppData.commands.map(cmd => {
+            const command = cmd.text.match(/"([^"]+)"/)?.[1] || cmd.text;
+            return `
+                <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group" data-command="${command}">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-${cmd.color}-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-${cmd.color}-200 transition-colors">
+                            <span class="text-${cmd.color}-600">${cmd.icon}</span>
+                        </div>
+                        <p class="text-sm text-gray-700 group-hover:text-gray-900">${cmd.text}</p>
                     </div>
-                    <p class="text-sm text-gray-700 group-hover:text-gray-900">${cmd.text}</p>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         this.container.innerHTML = `
             <div class="text-center text-gray-500 py-6">
@@ -888,7 +894,7 @@ class ChatSimulator {
                 </div>
                 <p class="text-lg font-semibold text-gray-700 mb-1">ManoLab AI와 대화해보세요!</p>
                 <p class="text-sm text-gray-500 mb-6">아래 예시 명령어를 클릭하거나 직접 입력해보세요.</p>
-                <div class="space-y-3 text-left max-h-80 overflow-y-auto pr-2">${commands}</div>
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-3 text-left max-h-60 overflow-y-auto pr-2">${commands}</div>
                 <p class="text-xs text-gray-400 mt-4">💡 스크롤해서 더 많은 명령어를 확인하세요!</p>
             </div>
         `;
@@ -1018,16 +1024,19 @@ class DOMRenderer {
         if (!container) return;
         
         // 모든 명령어 표시 (8개)
-        container.innerHTML = AppData.commands.map(cmd => `
-            <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group">
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 bg-${cmd.color}-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-${cmd.color}-200 transition-colors">
-                        <span class="text-${cmd.color}-600">${cmd.icon}</span>
+        container.innerHTML = AppData.commands.map(cmd => {
+            const command = cmd.text.match(/"([^"]+)"/)?.[1] || cmd.text;
+            return `
+                <div class="bg-white rounded-xl p-4 border border-gray-200 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-200 group" data-command="${command}">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-${cmd.color}-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-${cmd.color}-200 transition-colors">
+                            <span class="text-${cmd.color}-600">${cmd.icon}</span>
+                        </div>
+                        <p class="text-sm text-gray-700 group-hover:text-gray-900">${cmd.text}</p>
                     </div>
-                    <p class="text-sm text-gray-700 group-hover:text-gray-900">${cmd.text}</p>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     static renderFeatures() {
